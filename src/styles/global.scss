@@ -1,0 +1,115 @@
+@import url('/src/styles/variables.scss');
+@import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10,100..900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body, #app, #body {
+width: 100%;
+height: 100%;
+font-family: "Inter", sans-serif;
+min-height: 100vh;
+transition:
+    color 0.5s,
+    background-color 0.5s;
+line-height: 1.6;
+text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+#body {
+    background-color: var(--back-color);
+    
+}
+#conteiner {
+    max-width: 1540px;
+    margin: auto;
+    padding: 0 100px;
+}
+.dark {
+    --back-color: #121212;
+    --text-color: #edf2fc;
+    --terc-color: #b4b4b4;
+    --icon-color: invert(0%);
+}
+
+p {
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+h1 {
+    font-size: 3rem;
+    color: var(--text-color);
+}
+h2 {
+    font-size: 2rem;
+    color: var(--text-color);
+}
+h3 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+a {
+    text-decoration: none;
+    color: var(--terc-color);
+    font-size: 1.3rem;
+}
+button {
+    background-color: var(--true-blue);
+    padding: 3px 10px;
+    font-size: 1.3rem;
+    color: #edf2fc;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    &:hover {
+        background-color: #0c3b79;
+    }
+}
+input {
+    width: 300px;
+    height: 25px;
+    background-color: var(--back-color);
+    color: var(--text-color);
+    border: 1px solid var(--terc-color);
+    border-radius: 10px;
+    padding: 3px 5px;
+    &::placeholder {
+        color: var(--terc-color);
+    }
+}
+.icon {
+    filter: var(--icon-color);
+    width: 40px;
+}
+
+.typeContent {
+    width: 80px;
+    font-size: 1rem;
+    text-align: center;
+    padding: 3px 0;
+    border-radius: 6px;
+}
+.grass {
+    background-color: rgb(25, 131, 25);
+}
+.poison {
+    background-color: #9240a7;
+}
+.fire {
+    background-color: rgb(226, 89, 25);
+}
+.water {
+    background-color: rgb(44, 120, 206);
+}
+.bug {
+    background-color: rgb(14, 85, 14);
+}
+.flying {
+    background: linear-gradient(rgb(60, 199, 209), #a1a1a1);
+}

@@ -1,0 +1,33 @@
+.conteiner {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .content {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    
+    }   
+}
+.linksConteiner {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    :hover {
+        .linkArrow {
+            rotate: -45deg;
+        }
+}
+.linksContent {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    }
+    .linkArrow {
+        width: 25px;
+        transition: 0.5s;
+        
+    }
+}
