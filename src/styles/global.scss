@@ -39,33 +39,36 @@ text-rendering: optimizeLegibility;
 }
 
 p {
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: var(--text-color);
 }
 h1 {
-    font-size: 3rem;
-    color: var(--text-color);
-}
-h2 {
     font-size: 2rem;
     color: var(--text-color);
 }
+h2 {
+    font-size: 1.7rem;
+    color: var(--text-color);
+}
 h3 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: var(--text-color);
 }
 a {
     text-decoration: none;
     color: var(--terc-color);
-    font-size: 1.3rem;
+    font-size: 1rem;
 }
 button {
     background-color: var(--true-blue);
     padding: 3px 10px;
-    font-size: 1.3rem;
+    font-size: 1rem;
     color: #edf2fc;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     &:hover {
         background-color: #0c3b79;
