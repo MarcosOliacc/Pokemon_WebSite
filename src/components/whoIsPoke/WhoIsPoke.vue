@@ -43,7 +43,7 @@ async function refresh() {
     <section class="conteiner">
         <div class="podiumConteiner">
             <div class="podiumContent" :style="{
-                background: response?`url('/src/assets/images/podiumOn.jpg')`:`url('/src/assets/images/podium.jpg')`
+                background: response?`url('/src/assets/images/podiumOn.png')`:`url('/src/assets/images/podium.png')`
             }">
                 <div class="pokeImg" :style="{
                     background:`url(https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/detail/${atual.id}.png)`,
