@@ -17,7 +17,7 @@ watch(randomPoke,(novo)=>{atual.value = novo; if(novo.id < 100) {
 function sendName() {
     if(inputValue.value !== '') {
         response.value = true
-        atual.value.name == inputValue.value? testResult.value = true : false
+        atual.value.name == inputValue.value.toString().toLowerCase()? testResult.value = true : false
     } else {
         alert('Digite o nome do pokemon na caixa antes de enviar!')
     }
