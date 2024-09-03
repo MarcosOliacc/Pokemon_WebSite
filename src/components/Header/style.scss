@@ -1,15 +1,17 @@
 @import url('/src/styles/variables.scss');
 .conteiner {
-    height: 100px;
+    height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     margin-bottom: 50px;
     .content {
         width: 100%;
         display: flex;
         justify-content: space-around;
         align-items: center;
+        margin-bottom: 20px;
     
     }   
 }
@@ -66,4 +68,8 @@
         color: var(--text-color);
         font-weight: 500;
     }
+}
+.hrss {
+    width: 100%;
+    color: var(--terc-color);
 }

@@ -28,7 +28,6 @@ function changeGadgets(novo) {
 }
 function changeTheme() {
   if(theme.value == 'light'){theme.value = 'dark'} else{theme.value = 'light'}
-  console.log(theme.value)
     emit('theme',theme.value)
 }
 
@@ -108,7 +107,8 @@ function pokeballMove(posit) {
             <div class="extraContent">
                 <button class="themeBtn" @click="changeTheme">tema</button>
             </div>
-        </nav> 
+        </nav>
+        <hr class="hrss"> 
     </header>
 </template>
 <style scoped>

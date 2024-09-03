@@ -23,19 +23,21 @@ text-rendering: optimizeLegibility;
 
 
 #body {
-    background-color: var(--back-color);
+    background: var(--img-bg);
     
 }
 #conteiner {
     max-width: 1540px;
     margin: auto;
     padding: 0 100px;
+    background-color: var(--back-color);
 }
 .dark {
     --back-color: #121212;
     --text-color: #edf2fc;
     --terc-color: #b4b4b4;
     --icon-color: invert(0%);
+    --img-bg: url('../assets/images/dark-bg.png');
 }
 
 p {
@@ -70,6 +72,7 @@ button {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: all 0.3s;
     &:hover {
         background-color: #0c3b79;
     }
