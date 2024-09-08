@@ -43,7 +43,7 @@ async function refresh() {
     <section class="conteiner">
         <div class="podiumConteiner">
             <div class="podiumContent" :style="{
-                background: `url('/src/assets/images/podium.png')`
+                background: `url('../../assets/images/podium.png')`
             }">
                 <div class="pokeImg" :style="{
                     background:`url(https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/detail/${atual.id}.png)`,
@@ -52,7 +52,7 @@ async function refresh() {
                 <button v-if="response" class="showPokeBtn">Ver Pokemon</button>
                 <button :class="`refreshBtn ${reload?'loading':''}`" @click="refresh"><img class="refreshIcon" src="/src/assets/images/icons/refreshIcon.svg" alt=""></button>
                 <div :class="`lightsPodium ${response?'on': 'off'}`" :style="{
-                    background:`url('/src/assets/images/lightsPodium.png')`
+                    background:`url('../../assets/images/lightsPodium.png')`
                 }"></div>
             </div>
         </div>
