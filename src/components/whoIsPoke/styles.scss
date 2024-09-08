@@ -23,7 +23,22 @@
     width: 400px;
     height: 400px;
     border-radius: 10px ;
+    overflow: hidden;
     position: relative;
+}
+.lightsPodium {
+    width: 400px;
+    height: 400px;
+    transition:all 600ms;
+    position: absolute;
+    left: 0;
+    top:-100%
+}
+.on {
+    transform: translateY(100%);
+}
+.off {
+    transform: translateY(-100%);
 }
 .pokeImg {
     width: 215px;
@@ -31,7 +46,8 @@
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -40%);
+    transform: translate(-40%, -30%);
+    z-index: 3;
 }
 .infosContent {
     display: flex;
@@ -53,7 +69,7 @@
 .showPokeBtn {
     position: absolute;
     left: 50%;
-    bottom: 10%;
+    bottom: 5%;
     transform: translateX(-50%);
     background-color: var(--true-red);
     &:hover {
