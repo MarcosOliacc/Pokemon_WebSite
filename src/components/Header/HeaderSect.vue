@@ -38,6 +38,7 @@ function handleSubmit(ev) {
 }
 function changeInput() {
     searchInput.value = ''
+    
 }
 function pokeballMove(posit) {
     PokeballPosition.value = posit

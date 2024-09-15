@@ -1,5 +1,10 @@
 <script setup>
 import WhoIsPoke from '@/components/whoIsPoke/WhoIsPoke.vue';
+import { usePokeStore } from '@/stores/pokemons';
+import { onMounted } from 'vue';
+
+const pokemon = usePokeStore()
+onMounted(()=> pokemon.loadAllPokes())
 </script>
 
 <template>
@@ -7,5 +12,6 @@ import WhoIsPoke from '@/components/whoIsPoke/WhoIsPoke.vue';
     <WhoIsPoke/>
 
     <h1>esta é a Home Page</h1>
+    <pre>{{pokemon.allPokemons[0]}}</pre>
   </main>
 </template>

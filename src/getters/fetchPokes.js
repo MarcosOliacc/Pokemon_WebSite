@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const fetchRandomPoke = axios.create({
+const fetchPokemons = axios.create({
     baseURL:'https://pokeapi.co/api/v2/pokemon/'
 })
-export default fetchRandomPoke
+export default fetchPokemons
