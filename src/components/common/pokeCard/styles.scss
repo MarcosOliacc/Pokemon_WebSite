@@ -1,0 +1,80 @@
+@import '/src/styles/variables.scss';
+.content {
+
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+    width: 250px;
+    height: 350px;
+    padding: 0px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    cursor: pointer;
+    .pokeName {
+        font-size: 1.8rem;
+    }
+    &:hover {
+        .pokeImg {
+            position: absolute;
+            animation: translate;
+            animation-duration: 400ms;
+        }
+    }
+}
+.imgContent {
+    width: 150px;
+    height: 150px;
+}
+.pokeImg {
+    width: 150px;
+}
+.infosConteiner {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+.dimensConteiner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    p {
+        display: flex;
+        gap: 5px;
+    }
+}
+.icon {
+    width: 20px;
+}
+.typesConteiner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.type {
+    border-radius: 10px;
+    width: 60px;
+    text-align: center;
+}
+@keyframes translate {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+
+ }

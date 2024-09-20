@@ -13,6 +13,7 @@ onMounted(async ()=>{randomPoke.value = await getRandonPoke()})
 
 watch(randomPoke,(novo)=>{atual.value = novo; if(novo.id < 100) {
     atual.value.id = atual.value.id.toString().padStart(3, '0')
+    
 }})
 function sendName() {
     if(inputValue.value !== '') {
@@ -44,8 +45,9 @@ async function refresh() {
         <div class="podiumConteiner">
             <div class="podiumContent" >
                 <div class="pokeImg" :style="{
-                    background:`url(https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/detail/${atual.id}.png)`,
-                    filter: response? 'none' : 'contrast(0%) brightness(0.60)'
+                    background:`url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${atual.id}.png) center center`,
+                    filter: response? 'none' : 'contrast(0%) brightness(0.60)',
+                    backgroundSize: '215px'
                 }"></div>
                 <button v-if="response" class="showPokeBtn">Ver Pokemon</button>
                 <button :class="`refreshBtn ${reload?'loading':''}`" @click="refresh"><img class="refreshIcon" src="/src/assets/images/icons/refreshIcon.svg" alt=""></button>

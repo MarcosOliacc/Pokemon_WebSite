@@ -5,19 +5,43 @@ import fetchPokemons from '@/getters/fetchPokes'
 
 export const usePokeStore = defineStore('poke-store', () => {
 
-
   const allPokemons = ref([])
+  const pokemonsPerPage = ref([])
+
+  // Função que carrega todos os pokemons;
   async function loadAllPokes() {
+    allPokemons.value = []
+    const data = []
     try {
-      const res1 = await fetchPokemons.get('?limit=1025')
+      const res1 = await fetchPokemons.get(`?limit=1028`)
       for(const poke of res1.data.results) {
         const res2 = await fetch(poke.url).then(res=> res.json())
-        allPokemons.value.push(res2)
+        data.push(res2)
       }
+      allPokemons.value = data
     } catch (error) {
       console.error('Erro ao buscar pokémons:', error);
     }
   }
+
+  // Função que carrega os pokemons de acordo com a pagina atual;
+  async function loadPokesPerPage(offset) {
+    pokemonsPerPage.value = []
+    const data = []
+    try {
+      const res1 = await fetchPokemons.get(`?limit=12&offset=${offset}`)
+      console.log('offset: '+offset)
+      for(const poke of res1.data.results) {
+        const res2 = await fetch(poke.url).then(res=> res.json())
+        data.push(res2)
+      }
+      pokemonsPerPage.value = data
+    } catch (error) {
+      console.error('Erro ao buscar pokémons:', error);
+    }
+  }
+
+  // Função que filtra "allPokemons" de acordo com a pesquisa de usuario
   async function searchPokes(param) {
     const field = 'name'
     const lowerParam = String(param).toLowerCase()
@@ -45,5 +69,5 @@ export const usePokeStore = defineStore('poke-store', () => {
     return filteredItens
     
   }
-  return {allPokemons , loadAllPokes, searchPokes}
+  return {allPokemons, pokemonsPerPage, loadAllPokes, loadPokesPerPage, searchPokes}
 })

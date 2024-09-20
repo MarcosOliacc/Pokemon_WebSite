@@ -1,0 +1,29 @@
+.conteiner {
+    background: url('/src/assets/images/backpokes.jpeg') no-repeat;
+    background-size: 100% 1250px;
+    width: 100%;
+    height: 1250px;
+}
+.shadowBoxX {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, var(--back-color), rgba(255, 0, 0, 0) 30%, var(--back-color));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+
+}
+.shadowBoxY {
+    background: linear-gradient(to bottom, var(--back-color), rgba(255, 0, 0, 0)30%, var(--back-color));
+    width: 100%;
+    height: 100%;
+    padding: 50px 50px;
+}
+.gridcontent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 40px 0px;
+
+}
