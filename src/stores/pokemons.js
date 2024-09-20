@@ -7,6 +7,7 @@ export const usePokeStore = defineStore('poke-store', () => {
 
   const allPokemons = ref([])
   const pokemonsPerPage = ref([])
+  const currentHomePage = ref(0)
 
   // Função que carrega todos os pokemons;
   async function loadAllPokes() {
@@ -24,18 +25,21 @@ export const usePokeStore = defineStore('poke-store', () => {
     }
   }
 
-  // Função que carrega os pokemons de acordo com a pagina atual;
+  // Função que carrega os pokemons de acordo com a chamada do cliente;
   async function loadPokesPerPage(offset) {
-    pokemonsPerPage.value = []
     const data = []
     try {
-      const res1 = await fetchPokemons.get(`?limit=12&offset=${offset}`)
+      const res1 = await fetchPokemons.get(`?limit=12&offset=${currentHomePage.value}`)
       console.log('offset: '+offset)
       for(const poke of res1.data.results) {
         const res2 = await fetch(poke.url).then(res=> res.json())
         data.push(res2)
       }
-      pokemonsPerPage.value = data
+      if(!offset) pokemonsPerPage.value.push(...data)
+      currentHomePage.value =+ offset? offset : 12
+      console.log(pokemonsPerPage.value)
+      console.log(currentHomePage.value)
+      return data
     } catch (error) {
       console.error('Erro ao buscar pokémons:', error);
     }

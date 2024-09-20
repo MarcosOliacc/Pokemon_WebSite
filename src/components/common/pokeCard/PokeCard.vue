@@ -23,7 +23,6 @@ watch(
         pokeHeight.value = String(poke.value.height).length > 1? String(poke.value.height).slice(0,1)+'.'+ String(poke.value.height).slice(1) : '0.'+ String(poke.value.height).slice(0)
 
         pokeweight.value =String(poke.value.weight).slice(0,-1)+'.'+ String(poke.value.weight).slice(-1)
-        console.log(poke.value.types)
         
   },
   { immediate: true }

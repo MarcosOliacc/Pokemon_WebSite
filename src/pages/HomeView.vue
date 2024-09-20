@@ -13,7 +13,7 @@ const pokeStore = usePokeStore()
 
     <h1>esta é a Home Page</h1>
     <div class="PokeGridConteiner">
-            <PokeGrid v-if="pokeStore.pokemonsPerPage.length > 1" :pokemons="pokeStore.pokemonsPerPage"/>
+            <PokeGrid v-if="pokeStore.pokemonsPerPage.length > 1" :origin="'homePage'" :pokemons="pokeStore.pokemonsPerPage"/>
         </div>
   </main>
 </template>

@@ -9,9 +9,7 @@ const pokeStore = usePokeStore()
 const foundPokes = ref([])
 
 onMounted(async()=>{
-    if(pokeStore.allPokemons.length > 12) {
-        foundPokes.value = await pokeStore.searchPokes(param.value)
-    }
+    foundPokes.value = await pokeStore.searchPokes(param.value)
 })
 
 watch(()=>pokeStore.allPokemons, async ()=> {
