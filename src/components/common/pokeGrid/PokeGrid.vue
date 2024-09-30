@@ -53,7 +53,7 @@ function nextPage() {
           </div>
 
           <div class="pagsContent">
-              <button @click="nextPage">proxima pagina</button>
+              <button @click="nextPage">Mostrar mais</button>
           </div>
 
         </div>

@@ -56,7 +56,6 @@ function pokeballMove(posit) {
                     <img class="pokeLogo" src="/src/assets/images/logos/pokeLogo.png" alt="">
                 </RouterLink>
             </div>
-            <div class="searchConteiner">
                 <form @submit="handleSubmit" class="searchContent">
                     <input type="text" class="searchInput"
                     placeholder="Procurando Pokemons?"
@@ -70,7 +69,6 @@ function pokeballMove(posit) {
                     </button>  
                     
                 </form>
-            </div>
             <div class="linksConteiner" @mouseleave="()=>{changeGadgets(route.name)}"> 
                 <div class="pokeballContent" :style="{
                             left: PokeballPosition

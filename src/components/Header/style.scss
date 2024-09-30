@@ -12,7 +12,6 @@
         justify-content: space-around;
         align-items: center;
         margin-bottom: 20px;
-    
     }   
 }
 .pokeLogo {
@@ -72,4 +71,61 @@
 .hrss {
     width: 100%;
     color: var(--terc-color);
+}
+
+@media (max-width: 1280px ) {
+    .conteiner {
+        .content {
+            justify-content: space-between;
+        }
+
+    }
+    .searchContent {
+        
+        .searchInput {
+            width: 100%;
+            height: 20px;
+            font-size: 0.8rem;
+        }
+    }
+    .linksConteiner {
+        a {
+            font-size: 0.7rem;
+        }
+        .linksContent {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    }
+    .slideContent {
+        width: 100%;
+        .slideBar{
+            width: 110%;
+            height: 5px;
+            margin-top: 5px;
+            border-radius: 5px;
+            background-color: var(--terc-color);
+            position: relative;
+            .redContent {
+                width: 80px;
+                height: 5px;
+                border-radius: 5px;
+                background-color: var(--true-red);
+                transition: all 0.5s;
+                position: absolute;
+            }
+        }
+    }
+
+    .themeBtn {
+        font-size: 0.8rem;
+
+    }
+    .searchBtn {
+        .searchIcon {
+            width: 20px;
+        }
+    }
+
 }
