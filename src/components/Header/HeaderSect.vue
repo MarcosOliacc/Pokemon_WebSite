@@ -4,6 +4,8 @@ import { RouterLink, useRoute, useRouter } from 'vue-router';
 const barPosition = ref('')
 const PokeballPosition = ref('')
 const searchInput = ref('')
+const menu = ref(false)
+
 const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 const theme = ref(prefersDarkScheme.matches ? 'dark' : 'light')
 const router = useRouter()
@@ -16,6 +18,7 @@ watch(()=> route.name, (novo)=>{changeGadgets(novo)})
 function changeGadgets(novo) {
     switch (novo) {
         case 'home': barPosition.value = '0'; PokeballPosition.value = '10px';
+    
         break
         case 'search': barPosition.value = '97px';
         PokeballPosition.value = '110px';
@@ -56,19 +59,19 @@ function pokeballMove(posit) {
                     <img class="pokeLogo" src="/src/assets/images/logos/pokeLogo.png" alt="">
                 </RouterLink>
             </div>
-                <form @submit="handleSubmit" class="searchContent">
-                    <input type="text" class="searchInput"
-                    placeholder="Procurando Pokemons?"
-                    v-model="searchInput"
-                    @focusout="changeInput"
-                    @input="handleSubmit"
-                    maxlength="20"
-                    >
-                      <button type="submit" class="searchBtn">
-                        <img class="searchIcon" src="/src/assets/images/icons/searchIcon.svg" alt="">
-                    </button>  
-                    
-                </form>
+            <form @submit="handleSubmit" class="searchContent">
+                <input type="text" class="searchInput"
+                placeholder="Procurando Pokemons?"
+                v-model="searchInput"
+                @focusout="changeInput"
+                @input="handleSubmit"
+                maxlength="20"
+                >
+                    <button type="submit" class="searchBtn">
+                    <img class="searchIcon" src="/src/assets/images/icons/searchIcon.svg" alt="">
+                </button>  
+                
+            </form>
             <div class="linksConteiner" @mouseleave="()=>{changeGadgets(route.name)}"> 
                 <div class="pokeballContent" :style="{
                             left: PokeballPosition
@@ -103,8 +106,36 @@ function pokeballMove(posit) {
                     </div>
                 </div>
             </div>
-            <div class="extraContent">
-                <button class="themeBtn" @click="changeTheme">tema</button>
+            <div class="unifc">
+                <div class="extraContent">
+                    <button class="themeBtn" @click="changeTheme">tema</button>
+                </div>
+                <div class="navBurguerConteiner">
+                    <div v-if="menu" class="navBurguerContent">
+                        <RouterLink @click="()=>{menu = !menu}" to="/" class="linksBur">
+                            Inicio
+                            <hr>
+                        </RouterLink>
+                        <RouterLink @click="()=>{menu = !menu}" to="/search" class="linksBur">
+                            Procurar
+                            <hr>
+                        </RouterLink>
+                        <RouterLink @click="()=>{menu = !menu}" to="/about" class="linksBur">
+                            Sobre
+                            <hr>
+                        </RouterLink>
+                        <a @click="()=>{menu = !menu}" class="linksBur" 
+                            href="https://github.com/MarcosOliacc/vuejs/tree/main/03-treinandoConteudos/02-pokemons" 
+                            target="_blank">
+                            Repositório
+                            <hr>
+                        </a>
+                    </div>
+                    <button @click="()=> {menu = !menu}" class="burguerBarsContent">
+                        <img v-if="!menu" src="/src/assets/images/icons/barsMenu.svg" alt="barras do menu">
+                        <img v-else src="/src/assets/images/icons/closeMenu.svg" alt="barras do menu">
+                    </button>
+                </div>
             </div>
         </nav>
         <hr class="hrss"> 
