@@ -9,7 +9,16 @@ const randomPoke = ref({})
 const atual = ref({})
 const testResult = ref(false)
 const reload = ref(false)
-onMounted(async ()=>{randomPoke.value = await getRandonPoke()})
+const windowWidth = ref()
+
+const updateWindowWidth = ()=> {
+    windowWidth.value = window.innerWidth
+}
+onMounted(async ()=>{
+    randomPoke.value = await getRandonPoke()
+    windowWidth.value = window.innerWidth
+    window.addEventListener('resize', updateWindowWidth)
+})
 
 watch(randomPoke,(novo)=>{atual.value = novo; if(novo.id < 100) {
     atual.value.id = atual.value.id.toString().padStart(3, '0')
@@ -42,6 +51,7 @@ async function refresh() {
 </script>
 <template>
     <section class="conteiner">
+        <h2 v-if="windowWidth < 900">Quem é esse pokemon?</h2>
         <div class="podiumConteiner">
             <div class="podiumContent" >
                 <div class="pokeImg" :style="{
@@ -59,7 +69,7 @@ async function refresh() {
                 <h2 v-if="!response">Quem é esse pokemon?</h2>
                 <h2 v-if="response">{{ testResult ? 'Parabéns!!! Você acertou o pokemon &#128513;': 'Ops.. Parece que você errou o nome do pokemon &#128557;'}}</h2>
                 <p v-if="!response">
-                    {{ tip ? `O nome do pokemon começa com a letra: ${atual.name} &#129296;`: 'Observe a imagem ao lado e tente descobrir o nome dele &#128512;' }}
+                    {{ tip ? `O nome do pokemon começa com a letra: ${atual.name} &#129296;`: 'Observe a imagem e tente descobrir o nome dele &#128512;' }}
                 </p>
                 <p v-if="response">Esse pokemon se chama <strong>{{atual.name}}</strong> &#129299;</p>
                 <input v-model="inputValue" v-if="!response" type="text" placeholder="Digite o nome do Pokemon...">

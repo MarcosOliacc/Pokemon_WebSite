@@ -90,3 +90,16 @@
         
     }
 }
+@media (max-width:900px) {
+    .conteiner {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 50px;
+        align-items: center;
+    }
+    .infosContent {
+        align-items: center;
+        
+    }
+}
