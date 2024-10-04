@@ -109,6 +109,7 @@ function pokeballMove(posit) {
             <div class="unifc">
                 <div class="extraContent">
                     <img class="themeBtn icon" @click="changeTheme" :src="theme !== 'dark'? '/src/assets/images/icons/dark-mode.svg': '/src/assets/images/icons/light-mode.svg'" alt="mode"/>
+                    <img class="themeBtn icon" @click="changeTheme" src="/src/assets/images/icons/dark-mode.svg" alt="mode"/>
                 </div>
                 <div class="navBurguerConteiner">
                     <div v-if="menu" class="navBurguerContent">
