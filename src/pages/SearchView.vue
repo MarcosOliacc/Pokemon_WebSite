@@ -6,14 +6,30 @@ import PokeGrid from '@/components/common/pokeGrid/PokeGrid.vue';
 const param = ref('')
 const route = useRoute()
 const pokeStore = usePokeStore()
+const loading = ref(true)
 const foundPokes = ref([])
 
 onMounted(async()=>{
-    foundPokes.value = await pokeStore.searchPokes(param.value)
+    if(pokeStore.allPokemons.length > 0) {
+        try {
+    foundPokes.value = await pokeStore.searchPokes(param.value);
+  } catch (error) {
+    console.error("Erro ao buscar pokémons:", error);
+  } finally {
+    loading.value = false;
+  }
+    }
+
 })
 
 watch(()=>pokeStore.allPokemons, async ()=> {
-    foundPokes.value = await pokeStore.searchPokes(param.value)
+    try {
+    foundPokes.value = await pokeStore.searchPokes(param.value);
+  } catch (error) {
+    console.error("Erro ao buscar pokémons:", error);
+  } finally {
+    loading.value = false;
+  }
 })
 
 watch( ()=> route.params.name, async (novo) => {
@@ -31,13 +47,17 @@ watch( ()=> route.params.name, async (novo) => {
 
 <template>
     <section class="conteiner">
-        <div>
+        <div class="searchParams">
             <p v-if="param == ''"> - Digite o nome desejado na barra de pesquisa a cima.</p>
             <p v-else> - Procurando por: "{{param}}"</p>
 
         </div>
         <div class="PokeGridConteiner">
-            <PokeGrid :pokemons="foundPokes"/>
+            <div v-if="loading"><h1>loading</h1></div>
+            <PokeGrid v-else :pokemons="foundPokes"/>
         </div>
     </section>
 </template>
+<style scoped>
+@import '/src/styles/pageStyles/searchView.scss';
+</style>

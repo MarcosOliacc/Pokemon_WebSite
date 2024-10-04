@@ -11,14 +11,11 @@ export const usePokeStore = defineStore('poke-store', () => {
 
   // Função que carrega todos os pokemons;
   async function loadAllPokes() {
-    allPokemons.value = []
-    const data = []
     try {
       const res1 = await fetchPokemons.get(`?limit=1028`)
-      for(const poke of res1.data.results) {
-        const res2 = await fetch(poke.url).then(res=> res.json())
-        data.push(res2)
-      }
+      const requests = res1.data.results.map( poke => fetch(poke.url).then(res => res.json()))
+      const data = await Promise.all(requests)
+
       allPokemons.value = data
     } catch (error) {
       console.error('Erro ao buscar pokémons:', error);
@@ -37,8 +34,6 @@ export const usePokeStore = defineStore('poke-store', () => {
       }
       if(!offset) pokemonsPerPage.value.push(...data)
       currentHomePage.value =+ offset? offset : 12
-      console.log(pokemonsPerPage.value)
-      console.log(currentHomePage.value)
       return data
     } catch (error) {
       console.error('Erro ao buscar pokémons:', error);
