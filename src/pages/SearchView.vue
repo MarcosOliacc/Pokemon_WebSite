@@ -59,5 +59,9 @@ watch( ()=> route.params.name, async (novo) => {
     </section>
 </template>
 <style scoped>
-@import '/src/styles/pageStyles/searchView.scss';
+.conteiner {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
 </style>

@@ -20,6 +20,7 @@ const pokesPerPage = ref([])
 watch(
   () => props.pokemons,
   (newPokemons) => {
+    perPageNumber.value = 12
     allPokes.value = [...newPokemons];
     pokesPerPage.value = allPokes.value.slice(0, perPageNumber.value)
   },
@@ -48,11 +49,15 @@ function nextPage() {
     <section class="conteiner">
       <div class="shadowBoxX">
         <div class="shadowBoxY">
-          <div class="gridcontent">
+          <div v-if="pokesPerPage.length > 0" class="gridcontent">
             <PokeCard v-for="pok of pokesPerPage" :key="pok.id" :pokemon="pok"/>
           </div>
+          <div v-else><h1>Nenhum pokemon encontrado :(</h1></div>
 
-          <div class="pagsContent">
+          <div v-if="perPageNumber < allPokes.length && props.origin !== 'homePage'" class="pagsContent">
+              <button @click="nextPage">Mostrar mais</button>
+          </div>
+          <div v-if="props.origin == 'homePage'" class="pagsContent">
               <button @click="nextPage">Mostrar mais</button>
           </div>
 
