@@ -68,5 +68,15 @@ export const usePokeStore = defineStore('poke-store', () => {
     return filteredItens
     
   }
-  return {allPokemons, pokemonsPerPage, loadAllPokes, loadPokesPerPage, searchPokes}
+  // Função que retorna todas as habilidades 
+  async function getSkills() {
+    try {
+      const res = await fetch('https://pokeapi.co/api/v2/ability/').then(res => res.json()) 
+      return res
+
+    } catch (error) {
+      console.error('Erro ao buscar as habilidades', error);
+    }
+  }
+  return {allPokemons, pokemonsPerPage,getSkills, loadAllPokes, loadPokesPerPage, searchPokes}
 })
