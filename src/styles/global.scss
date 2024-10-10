@@ -97,6 +97,7 @@ input {
 .typeContent {
     width: 80px;
     font-size: 1rem;
+    color: #edf2fc;
     text-align: center;
     padding: 3px 0;
     border-radius: 6px;
@@ -123,13 +124,37 @@ input {
     background-color: rgb(88, 32, 5);
 }
 .fighting {
-    background-color: rgb(20, 15, 13);
+    background: linear-gradient(rgb(3, 4, 85), #010103,rgb(3, 4, 85));
 }
 .electric {
-    background-color: rgb(121, 129, 0);
+    background-color: rgb(209, 145, 6);
 }
 .psychic {
     background: linear-gradient(rgb(20, 20, 20), #727171,rgb(20, 20, 20));
+}
+.dragon {
+    background-color: rgb(129, 30, 0);
+}
+.dark {
+    background-color: rgb(34, 31, 30);
+}
+.ice {
+    background-color: rgb(6, 165, 165);
+}
+.fairy {
+    background-color: rgb(199, 10, 199);
+}
+.ghost {
+    background-color: rgb(109, 148, 155);
+}
+.normal {
+    background-color: rgb(15, 13, 129);
+}
+.rock {
+    background: linear-gradient(rgb(78, 28, 9), #240d0d,rgb(20, 20, 20));
+}
+.steel {
+    background: linear-gradient(rgb(63, 56, 56), #121416,rgb(58, 52, 52));
 }
 @media (max-width: 1100px) {
     #conteiner {

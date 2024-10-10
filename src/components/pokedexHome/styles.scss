@@ -90,6 +90,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
         img {
             width: 15px;
         }
@@ -97,6 +98,65 @@
     .type {
         width: 100px;
         border-radius: 10px;
+        cursor: pointer;
     }
     
+}
+
+.aspectsFilterContent {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    h2 {
+        font-size: 2rem;
+        font-weight: 400;
+        color: #edf2fc;
+    }
+}
+.abilityContent {
+    .selectContent {
+        width: 400px;
+        padding: 10px 20px;
+        
+        background-color: var(--back-color);
+        color: var(--text-color);
+        font-size: 1.2rem;
+
+        position: relative;
+        z-index: 5;
+        li {
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+        
+    }
+}
+.optionsContent {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 400px;
+    height: 300px;
+    padding: 10px 20px;
+
+    overflow-y: scroll;
+    background-color: gray;
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+    
+    
+}
+.option {
+    height: 25px;
+    padding: 15px;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    cursor: pointer;
+    &:hover {
+        background-color: var(--back-color);
+        color: rgb(11, 83, 11);
+    }
 }

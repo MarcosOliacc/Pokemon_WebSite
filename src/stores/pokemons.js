@@ -71,7 +71,7 @@ export const usePokeStore = defineStore('poke-store', () => {
   // Função que retorna todas as habilidades 
   async function getSkills() {
     try {
-      const res = await fetch('https://pokeapi.co/api/v2/ability/').then(res => res.json()) 
+      const res = await fetch('https://pokeapi.co/api/v2/ability/?offset=20&limit=2000').then(res => res.json()) 
       return res
 
     } catch (error) {
