@@ -27,7 +27,6 @@ export const usePokeStore = defineStore('poke-store', () => {
     const data = []
     try {
       const res1 = await fetchPokemons.get(`?limit=12&offset=${currentHomePage.value}`)
-      console.log('offset: '+offset)
       for(const poke of res1.data.results) {
         const res2 = await fetch(poke.url).then(res=> res.json())
         data.push(res2)

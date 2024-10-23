@@ -97,7 +97,7 @@ input {
 .typeContent {
     width: 80px;
     font-size: 1rem;
-    color: #edf2fc;
+    color: rgb(252, 240, 237);
     text-align: center;
     padding: 3px 0;
     border-radius: 6px;
@@ -161,3 +161,15 @@ input {
         padding: 0 30px;
     }
 }
+
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--back-color);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--text-color);
+    border-radius: 40px;
+  }
+  
