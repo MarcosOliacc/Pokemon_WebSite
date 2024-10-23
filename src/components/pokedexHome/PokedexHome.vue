@@ -136,7 +136,7 @@ watch(filterContent, ()=>{
                                 <div    
                                     class="heightImg"
                                     :style="{
-                                        background: heightFilterSelected.includes('1') ? 'url(/src/assets/images/pokeHeightRed1.png)' : 'url(/src/assets/images/pokeHeightDark1.png)',
+                                        background: heightFilterSelected.includes('1') ? 'url(/assets/images/pokeHeightRed1.png)' : 'url(/assets/images/pokeHeightDark1.png)',
                                         width: '25px',
                                         height: '25px',
                                         backgroundSize: '25px'
@@ -150,7 +150,7 @@ watch(filterContent, ()=>{
                                 <div    
                                     class="heightImg"
                                     :style="{
-                                        backgroundImage: heightFilterSelected.includes('2') ? 'url(/src/assets/images/pokeHeightRed2.png)' : 'url(/src/assets/images/pokeHeightDark2.png)',
+                                        backgroundImage: heightFilterSelected.includes('2') ? 'url(/assets/images/pokeHeightRed2.png)' : 'url(/assets/images/pokeHeightDark2.png)',
                                         width: '40px',
                                         height: '40px',
                                         backgroundSize: '40px'
@@ -164,7 +164,7 @@ watch(filterContent, ()=>{
                                 <div    
                                     class="heightImg"
                                     :style="{
-                                        backgroundImage: heightFilterSelected.includes('3') ? 'url(/src/assets/images/pokeHeightRed3.png)' : 'url(/src/assets/images/pokeHeightDark3.png)',
+                                        backgroundImage: heightFilterSelected.includes('3') ? 'url(/assets/images/pokeHeightRed3.png)' : 'url(/assets/images/pokeHeightDark3.png)',
                                         width: '60px',
                                         height: '60px',
                                         backgroundSize: '60px'
