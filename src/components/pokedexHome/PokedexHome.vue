@@ -136,7 +136,7 @@ watch(filterContent, ()=>{
                                 <div    
                                     class="heightImg"
                                     :style="{
-                                        backgroundImage: heightFilterSelected.includes('1') ? 'url(/src/assets/images/pokeHeightRed1.png)' : 'url(/src/assets/images/pokeHeightDark1.png)',
+                                        background: heightFilterSelected.includes('1') ? 'url(/src/assets/images/pokeHeightRed1.png)' : 'url(/src/assets/images/pokeHeightDark1.png)',
                                         width: '25px',
                                         height: '25px',
                                         backgroundSize: '25px'
