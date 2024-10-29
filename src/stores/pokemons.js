@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import fetchPokemons from '@/getters/fetchPokes'
+import { filterAbilityPokes, filterHeightSelected, filterTypePokes } from '@/getters/filterPokes'
 
 
 export const usePokeStore = defineStore('poke-store', () => {
@@ -8,6 +9,7 @@ export const usePokeStore = defineStore('poke-store', () => {
   const allPokemons = ref([])
   const pokemonsPerPage = ref([])
   const currentHomePage = ref(0)
+  const filteredPokes = ref([])
 
   // Função que carrega todos os pokemons;
   async function loadAllPokes() {
@@ -21,7 +23,32 @@ export const usePokeStore = defineStore('poke-store', () => {
       console.error('Erro ao buscar pokémons:', error);
     }
   }
+  //Função que filtra todos os pokemons de acordo com os parametros recebidos;
+  async function filterPokemons(params) {
+    filteredPokes.value = []
+    let pokesForFilter = allPokemons.value
+    const paramsTypes = params.typeFilters
+    if(paramsTypes.some((ele)=> ele.active == true)) {
+      pokesForFilter = filterTypePokes({
+        paramsTypes, 
+        pokesForFilter
+      })
+    }
 
+    if (params.abilitySelected != 'Todas') {
+      pokesForFilter = filterAbilityPokes({pokesForFilter, abilitySelected: params.abilitySelected})
+    }
+    
+    if(params.heightFilterSelected.length > 0) {
+      pokesForFilter = filterHeightSelected({pokesForFilter, heights: params.heightFilterSelected})
+    }
+    if(params.minMaxNumber[0]!= 1 || params.minMaxNumber[1] != 1025) {
+      pokesForFilter = pokesForFilter.filter((element)=> element.id >= params.minMaxNumber[0] && element.id <= params.minMaxNumber[1])
+    }
+
+    filteredPokes.value = pokesForFilter
+    return true
+  }
   // Função que carrega os pokemons de acordo com a chamada do cliente;
   async function loadPokesPerPage(offset) {
     const data = []
@@ -77,5 +104,5 @@ export const usePokeStore = defineStore('poke-store', () => {
       console.error('Erro ao buscar as habilidades', error);
     }
   }
-  return {allPokemons, pokemonsPerPage,getSkills, loadAllPokes, loadPokesPerPage, searchPokes}
+  return {allPokemons, pokemonsPerPage, filteredPokes,getSkills, loadAllPokes, loadPokesPerPage, searchPokes, filterPokemons}
 })

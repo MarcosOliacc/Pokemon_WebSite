@@ -25,9 +25,11 @@
         transition: all 300ms;
         .typeFilterContent {
             width: 50%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             padding: 0px 50px;
+
         }
     }
     .activeFiltersContent {
@@ -77,7 +79,7 @@
     }
 }
 .typeContent {
-    width: 200px;
+    width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -102,6 +104,11 @@
     }
     
 }
+h2 {
+    font-size: 2rem;
+    font-weight: 400;
+    color: #edf2fc;
+}
 
 .aspectsFilterContent {
     display: flex;
@@ -109,11 +116,6 @@
     flex-direction: column;
     width: 50%;
 
-    h2 {
-        font-size: 2rem;
-        font-weight: 400;
-        color: #edf2fc;
-    }
 }
 .filt {
     display: flex;
@@ -155,11 +157,22 @@
     
     
 }
+.limitsNumberContent {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 30px;
+    input {
+        width: 80px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
 .option {
     height: 25px;
     padding: 15px;
     font-size: 1.1rem;
-    color: var(--text-color);
+    color: #edf2fc;
     cursor: pointer;
     &:hover {
         background-color: var(--back-color);
@@ -192,9 +205,12 @@
     }
 }
 .weightContent {
-    img {
-        width: 40px;
+    cursor: pointer;
+    .weightImg {
+        background-repeat: no-repeat;
+        background-position: center center;
     }
+
 
 }
 .heightContent {
@@ -204,16 +220,19 @@
         height: 50px;
     }
 }
-.heightContent:nth-child(1) {
-    img {
-        width: 30px;
+.sendfiltsContent {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: end;
+    max-width: 400px;
+    button {
+        height: 50px;
+        font-size: 1.3rem;
+        padding: 0px 10px;
+        font-weight: 500;
+        background-color: #121212;
     }
 }
-.heightContent:nth-child(3) {
-    img {
-        width: 70px;
-    }
-}
-.weightContent:nth-child(2) {.weightImg {}}
-.weightContent:nth-child(1) {.weightImg {width: 30px;}}
+
 //19 59 643

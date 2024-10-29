@@ -27,7 +27,13 @@ const pokeStore = usePokeStore()
 const filterContent = ref(false)
 const abilityFiltContent = ref(false)
 const abilitySelected = ref('Todas')
+const heightFilterSelected = ref([])
 const weightFilterSelected = ref([])
+const minPokNumber = ref(1)
+const maxPokNumber = ref(1025)
+
+// variável que altera o estado de acordo com a resposta :
+const resFilts = ref(false)
 
 const typeFilters = ref([
     {name: 'bug', active: false},
@@ -52,7 +58,6 @@ const typeFilters = ref([
 const skills = ref([])
 
 
-const heightFilterSelected = ref([])
 function handleHeightFilter(num) {
     const i = heightFilterSelected.value.indexOf(num)
     if(i > -1) {
@@ -61,7 +66,27 @@ function handleHeightFilter(num) {
         heightFilterSelected.value.push(num)
     }
     heightFilterSelected.value = [...heightFilterSelected.value].sort()
-    console.log(heightFilterSelected.value)
+}
+function handleWeightFilter(num) {
+    const i = weightFilterSelected.value.indexOf(num)
+    if(i > -1) {
+        weightFilterSelected.value.splice(i, 1)
+    } else {
+        weightFilterSelected.value.push(num)
+    }
+    weightFilterSelected.value = [...weightFilterSelected.value].sort()
+    console.log(weightFilterSelected.value)
+}
+
+async function handleSubmitfiltsParams() {
+    const res = await pokeStore.filterPokemons({
+        typeFilters: typeFilters.value,
+        minMaxNumber: [minPokNumber.value, maxPokNumber.value],
+        abilitySelected: abilitySelected.value,
+        heightFilterSelected: heightFilterSelected.value,
+        weightFilterSelected: weightFilterSelected.value
+    })
+    resFilts.value = res
 }
 
 watch(filterContent, ()=>{
@@ -96,6 +121,12 @@ watch(filterContent, ()=>{
                         </div>
                         <label
                         @click="type.active = !type.active" :class="`type ${type.name}` ">{{type.name[0].toUpperCase()+type.name.substring(1)}}</label>
+                    </div>
+                    <div class="limitsNumberContent">
+                        <h2>Intervalo de numeros</h2>
+                        <input type="number" class="interv" v-model="minPokNumber">
+                        <p>-</p>
+                        <input type="number" class="interv" v-model="maxPokNumber">
                     </div>
                 </div>
                 <div class="aspectsFilterContent">
@@ -176,19 +207,58 @@ watch(filterContent, ()=>{
                     <div class="weightfilt filt">
                         <h2>Peso</h2>
                         <div class="weightConteiner">
-                            <div class="weightContent">
-                                <img class="weightImg" src="/src/assets/images/icons/feather.svg" alt="pesopena">
+                            <div
+                                @click="()=> handleWeightFilter('1')"
+                                :style="{backgroundColor: weightFilterSelected.includes('1') ? '#121212' : '#edf2fc'}"
+                                class="weightContent">
+                                <div    
+                                    class="weightImg"
+                                    :style="{
+                                        backgroundImage: weightFilterSelected.includes('1') ? 'url(/weightRed1.png)' : 'url(/weightDark1.png)',
+                                        width: '30px',
+                                        height: '30px',
+                                        backgroundSize: '30px'
+                                    }">
+                                </div>
                             </div>
-                            <div class="weightContent">
-                                <svg class="weightImg" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" :fill="'#0c3b79'"><path d="M240-200h480l-57-400H297l-57 400Zm240-480q17 0 28.5-11.5T520-720q0-17-11.5-28.5T480-760q-17 0-28.5 11.5T440-720q0 17 11.5 28.5T480-680Zm113 0h70q30 0 52 20t27 49l57 400q5 36-18.5 63.5T720-120H240q-37 0-60.5-27.5T161-211l57-400q5-29 27-49t52-20h70q-3-10-5-19.5t-2-20.5q0-50 35-85t85-35q50 0 85 35t35 85q0 11-2 20.5t-5 19.5ZM240-200h480-480Z"/></svg>
+                            <div
+                                @click="()=> handleWeightFilter('2')"
+                                :style="{backgroundColor: weightFilterSelected.includes('2') ? '#121212' : '#edf2fc'}"
+                                class="weightContent">
+                                <div    
+                                    class="weightImg"
+                                    :style="{
+                                        backgroundImage: weightFilterSelected.includes('2') ? 'url(/weightRed2.png)' : 'url(/weightDark2.png)',
+                                        width: '50px',
+                                        height: '50px',
+                                        backgroundSize: '50px'
+                                    }">
+                                </div>
                             </div>
-                            <div class="weightContent">
-                                <img class="weightImg" src="/src/assets/images/icons/anvil.svg" alt="pesopesado">
+                            <div
+                                @click="()=> handleWeightFilter('3')"
+                                :style="{backgroundColor: weightFilterSelected.includes('3') ? '#121212' : '#edf2fc'}"
+                                class="weightContent">
+                                <div    
+                                    class="weightImg"
+                                    :style="{
+                                        backgroundImage: weightFilterSelected.includes('3') ? 'url(/weightRed3.png)' : 'url(/weightDark3.png)',
+                                        width: '60px',
+                                        height: '60px',
+                                        backgroundSize: '60px'
+                                    }">
+                                </div>
                             </div>
+                        
                         </div>
                     </div>
                     <div class="sendfiltsContent">
-
+                        <button class="refreshParams">
+                            Redefinir
+                        </button>
+                        <button class="sendParams" @click="handleSubmitfiltsParams">
+                            Pesquisar
+                        </button>
                     </div>
                 </div>
             </div>
@@ -203,7 +273,8 @@ watch(filterContent, ()=>{
                 </div>
             </div>
         </div>
-      <PokeGrid v-if="pokeStore.pokemonsPerPage.length > 1" :origin="'homePage'" :pokemons="pokeStore.pokemonsPerPage"/>
+        <PokeGrid v-if="resFilts" :pokemons="pokeStore.filteredPokes"/>
+        <PokeGrid v-else-if="pokeStore.pokemonsPerPage.length > 1" :origin="'homePage'" :pokemons="pokeStore.pokemonsPerPage"/>
     </div>
 </template>
 <style scoped>
