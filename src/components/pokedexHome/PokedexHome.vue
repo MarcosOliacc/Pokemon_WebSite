@@ -75,7 +75,19 @@ function handleWeightFilter(num) {
         weightFilterSelected.value.push(num)
     }
     weightFilterSelected.value = [...weightFilterSelected.value].sort()
-    console.log(weightFilterSelected.value)
+}
+function resetParams() {
+    abilitySelected.value = 'Todas'
+    typeFilters.value
+    heightFilterSelected.value = []
+    weightFilterSelected.value = []
+    minPokNumber.value = 1
+    maxPokNumber.value = 1025
+    typeFilters.value = typeFilters.value.map((obj)=>({
+        ...obj,
+        active : false
+    }) )
+    handleSubmitfiltsParams()
 }
 
 async function handleSubmitfiltsParams() {
@@ -253,7 +265,9 @@ watch(filterContent, ()=>{
                         </div>
                     </div>
                     <div class="sendfiltsContent">
-                        <button class="refreshParams">
+                        <button class="refreshParams"
+                        @click="resetParams"
+                        >
                             Redefinir
                         </button>
                         <button class="sendParams" @click="handleSubmitfiltsParams">

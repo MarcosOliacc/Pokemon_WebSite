@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import fetchPokemons from '@/getters/fetchPokes'
-import { filterAbilityPokes, filterHeightSelected, filterTypePokes } from '@/getters/filterPokes'
+import { filterAbilityPokes, filterHeightSelected, filterTypePokes, filterWeightSelected } from '@/getters/filterPokes'
 
 
 export const usePokeStore = defineStore('poke-store', () => {
@@ -42,9 +42,13 @@ export const usePokeStore = defineStore('poke-store', () => {
     if(params.heightFilterSelected.length > 0) {
       pokesForFilter = filterHeightSelected({pokesForFilter, heights: params.heightFilterSelected})
     }
+    if(params.weightFilterSelected.length > 0) {
+      pokesForFilter = filterWeightSelected({pokesForFilter, weights: params.weightFilterSelected})
+    }
     if(params.minMaxNumber[0]!= 1 || params.minMaxNumber[1] != 1025) {
       pokesForFilter = pokesForFilter.filter((element)=> element.id >= params.minMaxNumber[0] && element.id <= params.minMaxNumber[1])
     }
+    
 
     filteredPokes.value = pokesForFilter
     return true

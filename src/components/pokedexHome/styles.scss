@@ -23,14 +23,15 @@
         position: absolute;
         top: 0;
         transition: all 300ms;
-        .typeFilterContent {
-            width: 50%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 0px 50px;
+    }
+    .typeFilterContent {
+        width: 50%;
+        min-width: 390px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0px 50px;
 
-        }
     }
     .activeFiltersContent {
         width: 100%;
@@ -115,6 +116,7 @@ h2 {
     justify-content: space-around;
     flex-direction: column;
     width: 50%;
+    min-width: 490px;
 
 }
 .filt {
@@ -235,4 +237,100 @@ h2 {
     }
 }
 
+
 //19 59 643
+@media (max-width: 1250px) {
+    .limitsNumberContent {
+        h2 {
+            font-size: 1.2rem;
+        }
+    }
+}
+@media (max-width: 1180px) {
+    .filterConteiner{
+        .filtParamsConteiner {
+            padding: 20px 0px 20px 0px;
+            overflow-y: scroll;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+        .typeFilterContent {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+    
+            gap: 30px;
+            .typeContent {
+                width: 200px;
+            }
+        }
+        .aspectsFilterContent {
+            width: 100%;
+            align-items: center;
+            gap: 30px;
+            div {
+                gap: 30px;
+            }
+        }
+
+    }
+}
+
+@media (max-width: 611px) {
+    .filterConteiner{
+        .typeFilterContent {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+    
+            gap: 30px;
+            .typeContent {
+                width: 130px;
+            }
+        }
+        .aspectsFilterContent {
+            width: 100%;
+            align-items: center;
+            gap: 30px;
+            min-width: 0px;
+            div {
+                gap: 30px;
+                width: 90%;
+            }
+        }
+
+        .activeFiltersContent {
+            .subContent {
+                width: 60%;
+            }
+
+        }
+
+
+        
+    }
+    .limitsNumberContent {
+        flex-direction: column;
+        gap: 10px;
+    } 
+}
+@media (max-width: 462px) {
+    .filterConteiner {
+        .filtParamsConteiner{
+            .typeFilterContent {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 0;
+                gap: 30px;
+                .typeContent {
+                    width: 90%;
+                }
+            }
+
+        }
+    }
+}
