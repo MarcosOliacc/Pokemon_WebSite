@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue';
 import getRandonPoke from '@/getters/getRandomPoke';
+import { useRouter } from 'vue-router';
 
 const response = ref(false)
 const tip = ref(false)
@@ -10,7 +11,7 @@ const atual = ref({})
 const testResult = ref(false)
 const reload = ref(false)
 const windowWidth = ref()
-
+const router = useRouter()
 const updateWindowWidth = ()=> {
     windowWidth.value = window.innerWidth
 }
@@ -59,7 +60,8 @@ async function refresh() {
                     filter: response? 'none' : 'contrast(0%) brightness(0.60)',
                     backgroundSize: '215px'
                 }"></div>
-                <button v-if="response" class="showPokeBtn">Ver Pokemon</button>
+                <button v-if="response" class="showPokeBtn" @click="()=>{router.push(`/pokemon/${atual.name}`)}">Ver Pokemon</button>
+
                 <button :class="`refreshBtn ${reload?'loading':''}`" @click="refresh"><img class="refreshIcon" src="/src/assets/images/icons/refreshIcon.svg" alt=""></button>
                 <div :class="`lightsPodium ${response?'on': 'off'}`" ></div>
             </div>
