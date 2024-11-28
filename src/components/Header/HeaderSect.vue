@@ -144,7 +144,7 @@ function pokeballMove(posit) {
                             <hr>
                         </a>
                     </div>
-                    <div @click="()=> {menu = !menu}" class="burguerBarsContent">
+                    <div id="alo" @click="()=> {menu = !menu}" class="burguerBarsContent">
                         <img class="icon" v-if="!menu" src="/src/assets/images/icons/barsMenu.svg" alt="barras do menu">
                         <img class="icon" v-else src="/src/assets/images/icons/closeMenu.svg" alt="barras do menu">
                     </div>

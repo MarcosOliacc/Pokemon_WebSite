@@ -74,7 +74,7 @@
     bottom: 5%;
     transform: translateX(-50%);
     background-color: var(--true-red);
-    z-index: 999;
+    z-index: 99;
     &:hover {
         background-color: #880914;
     }
@@ -82,7 +82,7 @@
 .refreshBtn {
     position: absolute;
     right: 0;
-    z-index: 999;
+    z-index: 99;
     
 }
 .loading {

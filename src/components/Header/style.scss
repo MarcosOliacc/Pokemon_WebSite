@@ -58,6 +58,13 @@
         }
     }
 }
+.burguerBarsContent {
+    z-index: 9999;
+    img {
+        z-index: 9999;
+    }
+    
+}
 
 .linksContent {
     display: flex;
@@ -80,11 +87,17 @@
     height: 100%;
     display: flex;
     align-items: center;
+    
 }
 .icon {
     width: 30px;
 }
-
+.navBurguerContent {
+    z-index: 99;
+}
+.unifc {
+    z-index: 999;
+}
 @media (max-width: 1280px ) {
 
     .searchContent {
@@ -170,7 +183,8 @@
             height: 40px;
             display: flex;
             align-items: center;
-        
+            z-index: 99999;
+            
         }
 
         .navBurguerContent {
@@ -190,7 +204,7 @@
             padding: 20px;
 
             position: absolute;
-            right: 120%;
+            right: 10%;
             
             .linksBur {
                 font-size: 1.2rem;
