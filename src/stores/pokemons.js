@@ -108,5 +108,15 @@ export const usePokeStore = defineStore('poke-store', () => {
       console.error('Erro ao buscar as habilidades', error);
     }
   }
-  return {allPokemons, pokemonsPerPage, filteredPokes,getSkills, loadAllPokes, loadPokesPerPage, searchPokes, filterPokemons}
+  async function getPoke(param) {
+    const lowerParam = String(param).toLowerCase()
+    const res = allPokemons.value.filter((poke)=> {
+      if(poke.name == lowerParam) {return poke}
+      else if (poke.id == lowerParam) {return poke}
+      else return false
+    })
+    return res[0]
+  }
+
+  return {allPokemons, pokemonsPerPage, filteredPokes, getPoke, getSkills, loadAllPokes, loadPokesPerPage, searchPokes, filterPokemons}
 })

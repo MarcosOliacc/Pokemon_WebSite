@@ -5,6 +5,8 @@ const barPosition = ref('')
 const PokeballPosition = ref('')
 const searchInput = ref('')
 const menu = ref(false)
+const pokeball = ref(null)
+const navBar = ref(null)
 
 const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 const theme = ref(prefersDarkScheme.matches ? 'dark' : 'light')
@@ -13,7 +15,16 @@ const route = useRoute()
 const emit = defineEmits(['theme'])
 emit('theme',theme.value)
 
-watch(()=> route.name, (novo)=>{changeGadgets(novo)})
+watch(()=> route.name, (novo)=>{
+    if(novo != 'pokemon') {
+        changeGadgets(novo)
+        pokeball.value.style.display = 'block'
+        navBar.value.style.display = 'block'
+    } else {
+        pokeball.value.style.display = 'none'
+        navBar.value.style.display = 'none'
+    }
+})
 
 function changeGadgets(novo) {
     switch (novo) {
@@ -73,7 +84,7 @@ function pokeballMove(posit) {
                 
             </form>
             <div class="linksConteiner" @mouseleave="()=>{changeGadgets(route.name)}"> 
-                <div class="pokeballContent" :style="{
+                <div ref="pokeball" class="pokeballContent" :style="{
                             left: PokeballPosition
                         }">
                     <img src="/src/assets/images/icons/pokeball.png" alt="pokebolpng">
@@ -99,7 +110,7 @@ function pokeballMove(posit) {
                     
                     <div class="slideBar">
                         
-                        <div class="redContent" :style="{
+                        <div ref="navBar" class="redContent" :style="{
                             left: barPosition
                         }"></div>
 
