@@ -24,14 +24,19 @@
         top: 0;
         transition: all 300ms;
     }
-    .typeFilterContent {
+    .typeFilterConteiner {
         width: 50%;
         min-width: 390px;
+        padding: 0px 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .typeFilterContent {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        padding: 0px 50px;
-
+        height: 90%;
     }
     .activeFiltersContent {
         width: 100%;
@@ -85,25 +90,26 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
-    .checkbox {
-        width:15px;
-        height: 15px;
-        border: 1px solid var(--terc-color);
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        img {
-            width: 15px;
-        }
-    }
+    
     .type {
         width: 100px;
         border-radius: 10px;
         cursor: pointer;
     }
     
+}
+.checkbox {
+    width:15px;
+    height: 15px;
+    border: 1px solid var(--terc-color);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    img {
+        width: 15px;
+    }
 }
 h2 {
     font-size: 2rem;
@@ -236,6 +242,16 @@ h2 {
         background-color: #121212;
     }
 }
+.actveTypes {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 30px;
+}
+.limitsNumberContent {
+    margin-top: 20px;
+}
 
 
 //19 59 643
@@ -255,11 +271,16 @@ h2 {
             justify-content: center;
             gap: 30px;
         }
+        .typeFilterConteiner {
+            width: 90%;
+            padding: 0 10px;
+            min-width: 100px;
+        }
         .typeFilterContent {
             width: 100%;
             display: flex;
             flex-direction: row;
-    
+            
             gap: 30px;
             .typeContent {
                 width: 200px;
@@ -314,6 +335,7 @@ h2 {
     .limitsNumberContent {
         flex-direction: column;
         gap: 10px;
+        margin-top: 20px;
     } 
 }
 @media (max-width: 462px) {
@@ -332,5 +354,9 @@ h2 {
             }
 
         }
+    }
+    .actveTypes {
+        display: flex;
+        
     }
 }

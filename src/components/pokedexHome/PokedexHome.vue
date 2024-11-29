@@ -31,6 +31,7 @@ const heightFilterSelected = ref([])
 const weightFilterSelected = ref([])
 const minPokNumber = ref(1)
 const maxPokNumber = ref(1025)
+const activeTypeFilter = ref(true)
 
 // variável que altera o estado de acordo com a resposta :
 const resFilts = ref(false)
@@ -88,6 +89,7 @@ function resetParams() {
         active : false
     }) )
     handleSubmitfiltsParams()
+    activeTypeFilter.value = true
 }
 
 async function handleSubmitfiltsParams() {
@@ -119,11 +121,20 @@ watch(filterContent, ()=>{
             <div
             :style="{top: filterContent ? '0': '-600px'}"
             class="filtParamsConteiner">
-                <div class="typeFilterContent">
+            <div class="typeFilterConteiner">
+                <h1>Filtrar Tipos</h1>
+                <div class="actveTypes">
+                    <button @click="activeTypeFilter = !activeTypeFilter" >Ativar Filtregem de Tipos?</button>
+                    <div @click="activeTypeFilter = !activeTypeFilter" class="checkbox">
+                        <img
+                        v-if="activeTypeFilter"
+                        src="/src/assets/images/icons/pokeball.png" alt="pokeball">
+                    </div>               
+                </div>
+                <div v-if="activeTypeFilter" class="typeFilterContent">
                     <div
                     v-for="(type, index) in typeFilters"
                     :key="index"
-                    
                     class="typeContent">
                         <div
                         @click="type.active = !type.active" class="checkbox">
@@ -131,16 +142,19 @@ watch(filterContent, ()=>{
                             v-if="type.active"
                             src="/src/assets/images/icons/pokeball.png" alt="pokeball">
                         </div>
-                        <label
-                        @click="type.active = !type.active" :class="`type ${type.name}` ">{{type.name[0].toUpperCase()+type.name.substring(1)}}</label>
-                    </div>
-                    <div class="limitsNumberContent">
-                        <h2>Intervalo de numeros</h2>
-                        <input type="number" class="interv" v-model="minPokNumber">
-                        <p>-</p>
-                        <input type="number" class="interv" v-model="maxPokNumber">
+                            <label
+                            @click="type.active = !type.active" :class="`type ${type.name}` ">{{type.name[0].toUpperCase()+type.name.substring(1)}}
+                        </label>
                     </div>
                 </div>
+                <div class="limitsNumberContent">
+                    <h2>Intervalo de numeros</h2>
+                    <input type="number" class="interv" v-model="minPokNumber">
+                    <p>-</p>
+                    <input type="number" class="interv" v-model="maxPokNumber">
+                </div>
+
+            </div>
                 <div class="aspectsFilterContent">
                     <div class="abilityContent filt">
                         <h2>Habilidade</h2>
