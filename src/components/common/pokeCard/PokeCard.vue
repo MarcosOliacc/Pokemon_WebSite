@@ -1,5 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
+const route = useRouter()
 
 const props = defineProps({
     pokemon: {
@@ -29,7 +31,7 @@ watch(
 );
 </script>
 <template>
-    <div class="content">
+    <div class="content" @click="()=> route.push(`/pokemon/${poke.name}`)">
         <div class="imgContent">
             <img class="pokeImg" v-bind:src="pokeImg">
         </div>
