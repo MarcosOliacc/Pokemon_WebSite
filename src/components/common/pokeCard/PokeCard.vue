@@ -33,7 +33,7 @@ watch(
         <div class="imgContent">
             <img class="pokeImg" v-bind:src="pokeImg">
         </div>
-        <h3 class="pokeName">{{ poke.name }} {{ poke.id }}</h3>
+        <h3 class="pokeName">{{ poke.name }}</h3>
         <div class="infosConteiner">
 
             <div class="dimensConteiner">

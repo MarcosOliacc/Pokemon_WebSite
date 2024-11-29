@@ -78,3 +78,51 @@
     }
 
  }
+
+@media (max-width: 700px) {
+    .content {
+        border-radius: 20px;
+        border:1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    
+        width: 150px;
+        height: 270px;
+        padding: 0px 10px;
+        gap: 20px;
+        .pokeName {
+            font-size: 1.2rem;
+        }
+    }
+    .imgContent {
+        width: 90px;
+        height: 90px;
+    }
+    .pokeImg {
+        width: 90px;
+    }
+    .infosConteiner {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1.5fr .5fr;
+    
+    }
+    .dimensConteiner {
+        p {
+            font-size: .7rem;
+        }
+    }
+    .icon {
+        width: 15px;
+    }
+    .typesConteiner {
+        gap: 5px;
+    }
+    .type {
+        border-radius: 5px;
+        width: 40px;
+        p {
+            font-size: .7rem;
+
+        }
+    }
+}

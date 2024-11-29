@@ -284,9 +284,11 @@ watch(filterContent, ()=>{
                         >
                             Redefinir
                         </button>
-                        <button class="sendParams" @click="handleSubmitfiltsParams">
-                            Pesquisar
-                        </button>
+                        <a href="#42323">
+                            <button class="sendParams" @click="handleSubmitfiltsParams">
+                                Pesquisar
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -301,7 +303,7 @@ watch(filterContent, ()=>{
                 </div>
             </div>
         </div>
-        <PokeGrid v-if="resFilts" :pokemons="pokeStore.filteredPokes"/>
+        <PokeGrid id="42323" v-if="resFilts" :pokemons="pokeStore.filteredPokes"/>
         <PokeGrid v-else-if="pokeStore.pokemonsPerPage.length > 1" :origin="'homePage'" :pokemons="pokeStore.pokemonsPerPage"/>
     </div>
 </template>
