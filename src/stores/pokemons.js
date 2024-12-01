@@ -117,6 +117,12 @@ export const usePokeStore = defineStore('poke-store', () => {
     })
     return res[0]
   }
+  async function getGerena(id) {
+    const [pokemon] = allPokemons.value.filter(poke=> poke.id == id)
+    const speciePokeUrl = pokemon.species.url 
+    const res = await fetch(speciePokeUrl).then(res=> res.json())
+    return {genera: res.genera[7], japName: res.names[0].name}
+  }
 
-  return {allPokemons, pokemonsPerPage, filteredPokes, getPoke, getSkills, loadAllPokes, loadPokesPerPage, searchPokes, filterPokemons}
+  return {allPokemons, pokemonsPerPage, filteredPokes, getPoke, getSkills, loadAllPokes,getGerena, loadPokesPerPage, searchPokes, filterPokemons}
 })

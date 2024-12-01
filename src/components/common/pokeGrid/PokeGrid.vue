@@ -33,7 +33,6 @@ watch(
     perPageNumber.value = 12
     pokesPerPage.value = []
     allPokes.value = [...newPokemons];
-    console.log(perPageNumber.value)
     pokesPerPage.value = allPokes.value.slice(0, perPageNumber.value)
   
     pokesPerPage.value.forEach((poke)=> {

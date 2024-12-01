@@ -1,7 +1,131 @@
+@import '/src/styles/variables.scss';
+
 .conteiner {
     width: 100%;
     min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-bottom: 100px;
+}
+
+.pokeConteiner {
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px var(--terc-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.topBlock {
+    display: flex;
+    justify-content: space-between;
+
+    height: 520px;
+}
+.figurePokeSect {
+    width: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 80%;
+    img {
+        width: 60%;
+    }
+    h1 {
+        font-size: 4rem;
+        position: absolute;
+        top: 90%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        opacity: 30%;
+        white-space: nowrap;
+    }
+
+}
+
+.infosPokeSect {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 50%;
+}
+.infosHeader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 150px;
+    position: relative;
+    p {
+        z-index: 2;
+        position: absolute;
+        top: 20%;
+        left: 0%;
+        transform: translate(-15%, -10%);
+    }
+    h2 {
+        font-size: 3rem;
+        z-index: 2;
+    }
+    .pokeId {
+        font-size: 10rem;
+        font-weight: 400;
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        opacity: 30%;
+        transform: translate(0%, -50%);
+    }
+}
+.seconInfos {
+
+}
+.dimensConteiner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    p {
+        display: flex;
+        gap: 5px;
+    }
+}
+.typesConteiner {
+    display: flex;
+    gap: 20px;
+}
+.typeHapp {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .type {
+        width: 60px;
+        border-radius: 10px;
+        p {
+            font-size: .8rem;
+            text-align: center;
+        }
+    }
+}
+.staticSect {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.staticTitle {
+    font-size: 1.5rem;
+}
+
+
+
+
+
+
+.bottomBlock {
+    width: 100%;
+    height: 30%;
+    display: flex;
+}
+.secunContent {
 }

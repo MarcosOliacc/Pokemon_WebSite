@@ -39,7 +39,7 @@ watch(
         <div class="infosConteiner">
 
             <div class="dimensConteiner">
-                <p><img class="icon" src="/src/assets/images/icons/weight.svg" alt="skills">{{ pokeweight }} kg</p>
+                <p><img class="icon1" src="/src/assets/images/icons/weight.svg" alt="skills">{{ pokeweight }} kg</p>
                 <p><img class="icon" src="/src/assets/images/icons/height.svg" alt="skills">{{pokeHeight}} m</p>
                 <p><img class="icon" src="/src/assets/images/icons/skills.svg" alt="skills" translate="yes">{{poke.abilities[0].ability.name}} </p>
             </div>  
