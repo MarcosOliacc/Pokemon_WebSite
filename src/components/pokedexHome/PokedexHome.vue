@@ -77,6 +77,7 @@ function handleWeightFilter(num) {
     }
     weightFilterSelected.value = [...weightFilterSelected.value].sort()
 }
+
 function resetParams() {
     abilitySelected.value = 'Todas'
     typeFilters.value

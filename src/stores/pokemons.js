@@ -49,7 +49,7 @@ export const usePokeStore = defineStore('poke-store', () => {
       pokesForFilter = pokesForFilter.filter((element)=> element.id >= params.minMaxNumber[0] && element.id <= params.minMaxNumber[1])
     }
     
-
+    console.log(pokesForFilter)
     filteredPokes.value = pokesForFilter
     return true
   }
