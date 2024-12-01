@@ -58,39 +58,72 @@ watch(()=> route.params.value , async (novo)=> {
         <div class="pokeConteiner">
             <div class="topBlock">
                 <div class="figurePokeSect">
-
+                    <img :src="img" :alt="`${pokemon.name} imagem`">
+                    <h1 class="japones">Nome em japones</h1>
                 </div>
                 <div class="infosPokeSect">
                     <div class="infosHeader">
-
+                        <div class="leftBit">pequenas infos</div>
+                        <h2>Nome do pokemon</h2>
+                        <h1>id do pokemon</h1>
                     </div>
                     <div class="secunInfos">
-
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos voluptas, praesentium vel dolore temporibus labore architecto fuga porro facere aliquam dolorum ipsum debitis sit aspernatur quo possimus incidunt blanditiis accusamus.</p>
                     </div>
                     <div class="statiSect">
-
+                        <div class="statcContent">
+                            <img class="icon statcIcon" src="" alt="">
+                            <p class="staticTitle"><span>sfhuasdf</span> - <span> 34</span></p>
+                        </div>
+                        <div class="statcContent">
+                            <img class="icon statcIcon" src="" alt="">
+                            <p class="staticTitle"><span>sfhuasdf</span> - <span> 34</span></p>
+                        </div>
+                        <div class="statcContent">
+                            <img class="icon statcIcon" src="" alt="">
+                            <p class="staticTitle"><span>sfhuasdf</span> - <span> 34</span></p>
+                        </div>
+                        <div class="statcContent">
+                            <img class="icon statcIcon" src="" alt="">
+                            <p class="staticTitle"><span>sfhuasdf</span> - <span> 34</span></p>
+                        </div>
+                        <div class="statcContent">
+                            <img class="icon statcIcon" src="" alt="">
+                            <p class="staticTitle"><span>sfhuasdf</span> - <span> 34</span></p>
+                        </div>
+                        <div class="statcContent">
+                            <img class="icon statcIcon" src="" alt="">
+                            <p class="staticTitle"><span>sfhuasdf</span> - <span> 34</span></p>
+                        </div>
                     </div>
 
                 </div>
             </div>
             <div class="bottomBlock">
                 <div class="secunContent">
-                    <h3 class="secunTitle"></h3>
+                    <h3 class="secunTitle">
+                        
+                    </h3>
                 </div>
                 <div class="secunContent">
-                    <h3 class="secunTitle"></h3>
+                    <h3 class="secunTitle">
+
+                    </h3>
                 </div>
                 <div class="secunContent">
-                    <h3 class="secunTitle"></h3>
+                    <h3 class="secunTitle">
+
+                    </h3>
                 </div>
                 <div class="secunContent">
-                    <h3 class="secunTitle"></h3>
+                    <h3 class="secunTitle">
+
+                    </h3>
                 </div>
             </div>
         </div>
         
         <h1>{{ pokemon.name }}</h1>
-        <img :src="img" alt="" ref=""> 
         <div :style="{
             width: '20px', height: '20px', backgroundColor: `rgb(${bgColor.join(',')})`
         }"></div>
