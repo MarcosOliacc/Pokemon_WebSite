@@ -22,7 +22,6 @@
     display: flex;
     justify-content: space-between;
 
-    height: 520px;
 }
 .figurePokeSect {
     width: 50%;
@@ -36,7 +35,7 @@
     h1 {
         font-size: 4rem;
         position: absolute;
-        top: 90%;
+        top: 100%;
         left: 50%;
         transform: translate(-50%, 0%);
         opacity: 30%;
@@ -48,7 +47,7 @@
 .infosPokeSect {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
     width: 50%;
 }
 .infosHeader {
@@ -62,7 +61,7 @@
         position: absolute;
         top: 20%;
         left: 0%;
-        transform: translate(-15%, -10%);
+        transform: translate(-15%, -30%);
     }
     h2 {
         font-size: 3rem;
@@ -108,10 +107,10 @@
         }
     }
 }
-.staticSect {
+.statiSect {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    .pstat{margin-top: 30px;}
 }
 .staticTitle {
     font-size: 1.5rem;
@@ -124,8 +123,25 @@
 
 .bottomBlock {
     width: 100%;
-    height: 30%;
     display: flex;
+    justify-content: space-between;
 }
-.secunContent {
+.seconContent {
+    height: 150px;
+
+}
+.skillsContent {
+    margin: 10px 0px 0px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    p {
+        font-weight: 700;
+    }
+}
+.no-interaction {
+    user-select: none;
+    pointer-events: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
 }

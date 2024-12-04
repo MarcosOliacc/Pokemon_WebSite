@@ -17,6 +17,8 @@ const pokeGenera = ref('')
 const japName = ref('')
 const pokeweight = ref('')
 const pokeHeight = ref('')
+const pokeText = ref('')
+const pokeSkills = ref([])
 function rgb(r,g,b) {
     return `rgb(${r}, ${g}, ${b})`
 }
@@ -33,18 +35,20 @@ const loadImageAndColor = async ()=> {
         image.crossOrigin = 'Anonymous'
         image.src = img.value 
 
-        await pokeStore.getGerena(3).then(res=> {
+        await pokeStore.getGerena(pokemon.value.id).then(res=> {
             pokeGenera.value = res.genera
             japName.value = res.japName
+            pokeText.value = res.text['flavor_text'].replaceAll("\\", ' ').normalize('NFC')
         })
+        await pokeStore.getPokeSkills(pokemon.value.id).then(res=> pokeSkills.value = res)
         pokeHeight.value = String(pokemon.value.height).length > 1? String(pokemon.value.height).slice(0,1)+'.'+ String(pokemon.value.height).slice(1) : '0.'+ String(pokemon.value.height).slice(0)
 
         pokeweight.value =String(pokemon.value.weight).slice(0,-1)+'.'+ String(pokemon.value.weight).slice(-1)
-
-        return new Promise((resolve) => {
-            image.onload = () => {
-                const colorThief = new ColorThief();
-                var plt = colorThief.getPalette(image, 4);
+        return new Promise((resolve, reject) => {
+        image.onload = () => {
+            try {
+            const colorThief = new ColorThief();
+            const plt = colorThief.getPalette(image, 4);
             var bgChannels, primaryChannels, secondaryChannels, thirdyChannels;
             [bgChannels, primaryChannels, secondaryChannels, thirdyChannels] = plt;
             var bgColor = rgb(bgChannels[0] + 30, bgChannels[1] + 30, bgChannels[2] + 30);
@@ -72,11 +76,20 @@ const loadImageAndColor = async ()=> {
                             }
                             `;
             document.body.appendChild(css);
-            console.log(pokemon.value.stats)
-            loading.value = false
-
-            resolve()
+            loading.value = false;
+            resolve();
+            } catch (err) {
+            console.error("Erro ao processar a imagem:", err);
+            loading.value = false;
+            reject(err);
             }
+        };
+
+        image.onerror = () => {
+            console.error("Erro ao carregar a imagem.");
+            loading.value = false;
+            reject(new Error("Falha ao carregar a imagem"));
+        };
         })
     } else{
         routeValue.value = ''
@@ -84,13 +97,24 @@ const loadImageAndColor = async ()=> {
         
 }   
 
-onBeforeMount( async ()=> {
-    routeValue.value = route.params.value
-    await loadImageAndColor()})
+onBeforeMount(async () => {
+  routeValue.value = route.params.value;
+  try {
+    await loadImageAndColor();
+  } catch (err) {
+    console.error("Erro no carregamento:", err);
+  }
+});
 
-watch(()=> route.params.value , async (novo)=> {
-    routeValue.value = novo
-    await loadImageAndColor()
+watch(() => route.params.value, async (novo, antigo) => {
+  if (novo !== antigo) {
+    routeValue.value = novo;
+    try {
+      await loadImageAndColor();
+    } catch (err) {
+      console.error("Erro no watch:", err);
+    }
+  }
 })
 </script>
 
@@ -102,10 +126,11 @@ watch(()=> route.params.value , async (novo)=> {
             <div class="topBlock">
                 <div class="figurePokeSect">
                     <img :src="img" :alt="`${pokemon.name} imagem`">
-                    <h1 class="secondaryColor">{{ japName }}</h1>
+                    <h1 class="secondaryColor no-interaction" contenteditable="false">{{ japName }}</h1>
                 </div>
-                <div class="infosPokeSect">
-                    <div class="infosHeader">
+                <div class="infosPokeSect no-interaction"
+                contenteditable="false">
+                    <div class="infosHeader" >
                         <p class="secondaryColor leftBit">{{pokeGenera.genus}}</p>
                         <h2 class="borderColor primaryColor">{{String(pokemon.name).charAt(0).toUpperCase() + String(pokemon.name).slice(1)}}</h2>
                         <h1 class="pokeId secondaryColor">{{ pokemon.id }}</h1>
@@ -135,28 +160,39 @@ watch(()=> route.params.value , async (novo)=> {
                         <div class="statcContent" v-for="stat of pokemon.stats" :key="stat.name">
                             <p class="staticTitle"><span class="thirdyColor">{{String(stat.stat.name).charAt(0).toUpperCase() + String(stat.stat.name).slice(1)}}</span><span class="secondaryColor"> - {{stat['base_stat']}}</span></p>
                         </div>
+                        <p class="pstat primaryColor">{{ pokeText}}</p>
                     </div>
 
                 </div>
             </div>
             <div class="bottomBlock">
-                <div class="secunContent">
-                    <h3 class="secunTitle">
+                <div class="seconContent">
+                    <h3 class="secondaryColor secunTitle">
                         habilidades 
                     </h3>
+                    <div class="skillsContent">
+                        <div  v-for="skill of pokeSkills" :key="skill.name">
+
+                            <p class="thirdyColor">{{ skill.name.replaceAll('-', ' ') }}</p>
+                            <div class="skillInfo">
+                                <p>{{ skill.text }}</p>
+                            </div>
+                        
+                        </div>
+                    </div>
                 </div>
                 <div class="secunContent">
-                    <h3 class="secunTitle">
+                    <h3 class="secondaryColor secunTitle">
                         familia 
                     </h3>
                 </div>
                 <div class="secunContent">
-                    <h3 class="secunTitle">
+                    <h3 class="secondaryColor secunTitle">
                         fraqueza 
                     </h3>
                 </div>
                 <div class="secunContent">
-                    <h3 class="secunTitle">
+                    <h3 class="secondaryColor secunTitle">
                         item
                     </h3>
                 </div>
