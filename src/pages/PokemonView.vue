@@ -1,24 +1,27 @@
 <script setup>
 import { usePokeStore } from '@/stores/pokemons';
 import { onBeforeMount, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import ColorThief from 'colorthief';
 import LoadingSect from '@/components/common/loading/LoadingSect.vue';
 import NoOne from '@/components/common/noOne/NoOne.vue';
 
 const route = useRoute();
+const router = useRouter()
 const pokeStore = usePokeStore();
 const routeValue = ref('')
 const loading = ref(false)
 
 const img = ref('')
-const pokemon = ref({});
+const pokeContent = ref({});
 const pokeGenera = ref('')
 const japName = ref('')
 const pokeweight = ref('')
 const pokeHeight = ref('')
 const pokeText = ref('')
 const pokeSkills = ref([])
+const actSkillSect = ref(null)
+const pokeFamily = ref({})
 function rgb(r,g,b) {
     return `rgb(${r}, ${g}, ${b})`
 }
@@ -28,22 +31,27 @@ const loadImageAndColor = async ()=> {
         loading.value = true
 
         await pokeStore.loadAllPokes()
-        await pokeStore.getPoke(route.params.value).then(res => pokemon.value = res)
-        img.value = pokemon.value.sprites.other['dream_world'].front_default
+        await pokeStore.getPoke(route.params.value).then(res => {
+            pokeContent.value = res
+            pokeGenera.value = res.infos.genera
+            pokeText.value = res.infos.text['flavor_text'].replaceAll("\\", ' ').normalize('NFC')
+            japName.value = res.infos.japName
+            pokeFamily.value = res.family
+            pokeSkills.value = res.skills
+        })
+        img.value = pokeContent.value.pokemon.sprites.other['dream_world'].front_default ? //----
+        pokeContent.value.pokemon.sprites.other['dream_world'].front_default : //----
+        pokeContent.value.pokemon.sprites.other['official-artwork'].front_default
+
     
         const image = new Image()
         image.crossOrigin = 'Anonymous'
         image.src = img.value 
+        
+        pokeHeight.value = String(pokeContent.value.pokemon.height).length > 1? String(pokeContent.value.pokemon.height).slice(0,1)+'.'+ String(pokeContent.value.pokemon.height).slice(1) : '0.'+ String(pokeContent.value.pokemon.height).slice(0)
 
-        await pokeStore.getGerena(pokemon.value.id).then(res=> {
-            pokeGenera.value = res.genera
-            japName.value = res.japName
-            pokeText.value = res.text['flavor_text'].replaceAll("\\", ' ').normalize('NFC')
-        })
-        await pokeStore.getPokeSkills(pokemon.value.id).then(res=> pokeSkills.value = res)
-        pokeHeight.value = String(pokemon.value.height).length > 1? String(pokemon.value.height).slice(0,1)+'.'+ String(pokemon.value.height).slice(1) : '0.'+ String(pokemon.value.height).slice(0)
+        pokeweight.value =String(pokeContent.value.pokemon.weight).slice(0,-1)+'.'+ String(pokeContent.value.pokemon.weight).slice(-1)
 
-        pokeweight.value =String(pokemon.value.weight).slice(0,-1)+'.'+ String(pokemon.value.weight).slice(-1)
         return new Promise((resolve, reject) => {
         image.onload = () => {
             try {
@@ -69,7 +77,7 @@ const loadImageAndColor = async ()=> {
                             }
                             .tooltipColor {
                                 background: ${bgColor};
-                                border-bottom: 56px solid ${secondaryColor};
+                                border-bottom: 30px solid ${secondaryColor};
                             }
                             .invertedColor {
                                 background: ${invertedColor}
@@ -125,21 +133,21 @@ watch(() => route.params.value, async (novo, antigo) => {
         <div v-if="!loading" class="pokeConteiner bgColor">
             <div class="topBlock">
                 <div class="figurePokeSect">
-                    <img :src="img" :alt="`${pokemon.name} imagem`">
+                    <img :src="img" :alt="`${pokeContent.pokemon.name} imagem`">
                     <h1 class="secondaryColor no-interaction" contenteditable="false">{{ japName }}</h1>
                 </div>
                 <div class="infosPokeSect no-interaction"
                 contenteditable="false">
                     <div class="infosHeader" >
                         <p class="secondaryColor leftBit">{{pokeGenera.genus}}</p>
-                        <h2 class="borderColor primaryColor">{{String(pokemon.name).charAt(0).toUpperCase() + String(pokemon.name).slice(1)}}</h2>
-                        <h1 class="pokeId secondaryColor">{{ pokemon.id }}</h1>
+                        <h2 class="borderColor primaryColor">{{String(pokeContent.pokemon.name).charAt(0).toUpperCase() + String(pokeContent.pokemon.name).slice(1)}}</h2>
+                        <h1 class="pokeId secondaryColor">{{ pokeContent.pokemon.id }}</h1>
                     </div>
                     <div class="seconInfos">
                         <div class="typesConteiner">
                             <div class="typeHapp">
                                 <div
-                                v-for="types of pokemon.types"
+                                v-for="types of pokeContent.pokemon.types"
                                 :key="types.type.name"
                                 :class="`type ${types.type.name}`"
                                 >
@@ -157,7 +165,7 @@ watch(() => route.params.value, async (novo, antigo) => {
                     
                     </div>
                     <div class="statiSect">
-                        <div class="statcContent" v-for="stat of pokemon.stats" :key="stat.name">
+                        <div class="statcContent" v-for="stat of pokeContent.pokemon.stats" :key="stat.name">
                             <p class="staticTitle"><span class="thirdyColor">{{String(stat.stat.name).charAt(0).toUpperCase() + String(stat.stat.name).slice(1)}}</span><span class="secondaryColor"> - {{stat['base_stat']}}</span></p>
                         </div>
                         <p class="pstat primaryColor">{{ pokeText}}</p>
@@ -171,27 +179,56 @@ watch(() => route.params.value, async (novo, antigo) => {
                         habilidades 
                     </h3>
                     <div class="skillsContent">
-                        <div  v-for="skill of pokeSkills" :key="skill.name">
+                        <div 
+                            class="skillPok" 
+                            v-for="skill of pokeSkills" 
+                            :key="skill.name" 
+                            style="position: relative;"
+                        >
+                            <!-- Nome da Habilidade -->
+                            <p
+                            class="thirdyColor skill"
+                            @mouseenter="actSkillSect = skill.name"
+                            @mouseleave="actSkillSect = null"
+                            :style="{ zIndex: actSkillSect === skill.name ? 3 : 1,
+                            position: 'relative',
+                            marginLeft: actSkillSect === skill.name ? '30px' : '0px',
 
-                            <p class="thirdyColor">{{ skill.name.replaceAll('-', ' ') }}</p>
-                            <div class="skillInfo">
-                                <p>{{ skill.text }}</p>
-                            </div>
-                        
+                             }"
+                            >
+                            {{ skill.name.replaceAll('-', ' ') }}
+                            </p>
+
+                            <!-- Texto da Habilidade -->
+                            <transition name="fade">
+                                <div
+                                @mouseenter="actSkillSect = skill.name"
+                                @mouseleave="actSkillSect = null"
+                                v-show="actSkillSect === skill.name"
+                                class="skillInfo tooltipColor"
+                                :style="{ zIndex: 2, position: 'absolute', bottom: '-10%' }"
+                                >
+                                <p class="primaryColor skillTxt">{{ skill.text }}</p>
+                                </div>
+
+                            </transition>
                         </div>
                     </div>
                 </div>
-                <div class="secunContent">
+                <div class="seconContent">
                     <h3 class="secondaryColor secunTitle">
                         familia 
                     </h3>
+                    <div class="familyContent">
+                        <img @click="()=>router.push(`/pokemon/${member}`) " v-for="member of pokeFamily" :key="member" :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${member}.svg`" alt="">
+                    </div>
                 </div>
-                <div class="secunContent">
+                <div class="seconContent">
                     <h3 class="secondaryColor secunTitle">
                         fraqueza 
                     </h3>
                 </div>
-                <div class="secunContent">
+                <div class="seconContent">
                     <h3 class="secondaryColor secunTitle">
                         item
                     </h3>

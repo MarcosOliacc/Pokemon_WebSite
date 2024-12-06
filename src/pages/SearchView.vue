@@ -35,6 +35,7 @@ watch(()=>pokeStore.allPokemons, async ()=> {
 watch( ()=> route.params.name, async (novo) => {
     if(novo !== '') {
         param.value = novo
+        foundPokes.value = []
         foundPokes.value = await pokeStore.searchPokes(param.value)
     } else {
         foundPokes.value = []

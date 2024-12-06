@@ -30,7 +30,7 @@
     justify-content: center;
     height: 80%;
     img {
-        width: 60%;
+        width: 50%;
     }
     h1 {
         font-size: 4rem;
@@ -127,18 +127,60 @@
     justify-content: space-between;
 }
 .seconContent {
-    height: 150px;
-
+    height: 200px;
+    width: 25%;
 }
 .skillsContent {
     margin: 10px 0px 0px 15px;
     display: flex;
     flex-direction: column;
+    align-items: start;
     gap: 10px;
-    p {
+
+    .skill {
         font-weight: 700;
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+    }
+    .skillTxt {
+        font-weight: 400;
+        font-size: .9rem;
     }
 }
+.skillInfo {
+    border-radius: 5px;
+    width: 300px;
+    padding: 10px;
+    cursor:pointer;
+    
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+.familyContent {
+    display: flex;
+    align-items:center;
+    gap: 20px;
+    img {
+        width: 80px;
+        cursor: pointer;
+    }
+}
+
+
+
+
 .no-interaction {
     user-select: none;
     pointer-events: none;

@@ -49,7 +49,6 @@ export const usePokeStore = defineStore('poke-store', () => {
       pokesForFilter = pokesForFilter.filter((element)=> element.id >= params.minMaxNumber[0] && element.id <= params.minMaxNumber[1])
     }
     
-    console.log(pokesForFilter)
     filteredPokes.value = pokesForFilter
     return true
   }
@@ -109,44 +108,62 @@ export const usePokeStore = defineStore('poke-store', () => {
     }
   }
   async function getPoke(param) {
+    const pokeContent = {}
     const lowerParam = String(param).toLowerCase()
     const res = allPokemons.value.filter((poke)=> {
       if(poke.name == lowerParam) {return poke}
       else if (poke.id == lowerParam) {return poke}
       else return false
     })
-    return res[0]
-  }
-  async function getGerena(id) {
-    const [pokemon] = allPokemons.value.filter(poke=> poke.id == id)
-    const speciePokeUrl = pokemon.species.url 
-    const res = await fetch(speciePokeUrl).then(res=> res.json())
-    return {genera: res.genera[7], japName: res.names[0].name, text: res['flavor_text_entries'][1]}
-  }
-  async function getPokeSkills(id) {
-    const [pokemon] = allPokemons.value.filter(poke=> poke.id == id)
+    pokeContent.pokemon = res[0]
+
+    const speciePokeUrl = pokeContent.pokemon.species.url 
+    const res2 = await fetch(speciePokeUrl).then(res=> res.json())
+    pokeContent.infos = {genera: res2.genera[7], japName: res2.names[0].name, text: res2['flavor_text_entries'][1]}
+
     let skills = []
 
     try {
-      const requests1 = pokemon.abilities.map( ab => fetch(ab.ability.url).then(res => res.json()))
+      const requests1 = pokeContent.pokemon.abilities.map( ab => fetch(ab.ability.url).then(res => res.json()))
       const data = await Promise.all(requests1)
-      console.log(data)
       data.forEach((skill)=> {
         const i = skill['effect_entries'].findIndex((item=> item.language.name == 'en'))
-        console.log(i)
         const a = {
           name: skill.name,
           text: skill['effect_entries'][i]['short_effect']
         }
         skills.push(a)
       })
-      return skills
+      pokeContent.skills = skills
     } catch (error) {
       console.error('Erro ao buscar pokémons:', error);
     }
-    
-    
+
+    try {
+      const famRes = await fetch(res2['evolution_chain'].url).then(res=> res.json())
+      
+      const famNames = [
+        famRes.chain.species.name, 
+        famRes.chain['evolves_to'][0].species.name ? famRes.chain['evolves_to'][0].species.name : '',
+        famRes.chain['evolves_to'][0]['evolves_to'][0].species.name ? famRes.chain['evolves_to'][0]['evolves_to'][0].species.name : ''
+      ]
+      
+      
+      const resIds = await Promise.all(
+        famNames.map(async (name) => {
+          return await fetchPokemons.get(name).then(res => res.data.id);
+        })
+      );
+      pokeContent.family = resIds
+    } catch (error) {
+      console.error('Erro ao buscar pokémons:', error);
+    }
+
+
+    return pokeContent
   }
 
-  return {allPokemons, pokemonsPerPage, filteredPokes,getPokeSkills, getPoke, getSkills, loadAllPokes,getGerena, loadPokesPerPage, searchPokes, filterPokemons}
+
+
+  return {allPokemons, pokemonsPerPage, filteredPokes, getPoke, getSkills, loadAllPokes, loadPokesPerPage, searchPokes, filterPokemons}
 })
