@@ -142,11 +142,17 @@ export const usePokeStore = defineStore('poke-store', () => {
     try {
       const famRes = await fetch(res2['evolution_chain'].url).then(res=> res.json())
       
+      // const famNames = [
+      //   famRes.chain.species.name? famRes.chain.species.name: '', 
+      //   famRes.chain['evolves_to'][0].species.name ? famRes.chain['evolves_to'][0].species.name : '',
+      //   famRes.chain['evolves_to'][0]['evolves_to'][0].species.name ? famRes.chain['evolves_to'][0]['evolves_to'][0].species.name : ''
+      // ]
+      
       const famNames = [
-        famRes.chain.species.name, 
-        famRes.chain['evolves_to'][0].species.name ? famRes.chain['evolves_to'][0].species.name : '',
-        famRes.chain['evolves_to'][0]['evolves_to'][0].species.name ? famRes.chain['evolves_to'][0]['evolves_to'][0].species.name : ''
-      ]
+        famRes.chain.species?.name || '', 
+        famRes.chain.evolves_to?.[0]?.species?.name || '',
+        famRes.chain.evolves_to?.[0]?.evolves_to?.[0]?.species?.name || ''
+      ];
       
       
       const resIds = await Promise.all(
