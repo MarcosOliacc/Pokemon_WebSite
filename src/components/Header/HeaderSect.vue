@@ -31,11 +31,11 @@ function changeGadgets(novo) {
         case 'home': barPosition.value = '0'; PokeballPosition.value = '10px';
     
         break
-        case 'search': barPosition.value = '97px';
-        PokeballPosition.value = '110px';
+        case 'search': barPosition.value = '105px';
+        PokeballPosition.value = '120px';
         break
-        case 'about': barPosition.value = '200px';
-        PokeballPosition.value = '215px';
+        case 'about': barPosition.value = '220px';
+        PokeballPosition.value = '225px';
         break
         
     }
@@ -93,10 +93,10 @@ function pokeballMove(posit) {
                     <RouterLink @mouseover="()=>{pokeballMove('10px')}" to="/" class="linksLi">
                         Inicio
                     </RouterLink>
-                    <RouterLink @mouseover="()=>{pokeballMove('110px')}" to="/search" class="linksLi">
+                    <RouterLink @mouseover="()=>{pokeballMove('120px')}" to="/search" class="linksLi">
                         Procurar
                     </RouterLink>
-                    <RouterLink @mouseover="()=>{pokeballMove('215px')}" to="/about" class="linksLi">
+                    <RouterLink @mouseover="()=>{pokeballMove('225px')}" to="/about" class="linksLi">
                         Sobre
                     </RouterLink>
                     <a @mouseover="()=>{pokeballMove('325px')}" class="linksLi" 

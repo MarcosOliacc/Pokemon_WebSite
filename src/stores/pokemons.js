@@ -164,6 +164,25 @@ export const usePokeStore = defineStore('poke-store', () => {
     } catch (error) {
       console.error('Erro ao buscar pokémons:', error);
     }
+    
+    try { 
+      const heldItems = await Promise.all(
+        pokeContent.pokemon['held_items'].map(async (item)=> {
+          const res = await fetch(item.item.url).then(res=> res.json())
+          return {
+            itemName: res.name,
+            text: res['effect_entries'][0]['short_effect'],
+            img: res.sprites.default
+            // reparar essa parte que esta dando erro, fazer testes
+          }
+        })
+        
+      ) 
+      pokeContent.items = heldItems
+    } catch (error) {
+      console.error('Erro ao buscar pokémons:', error);
+    }
+
 
 
     return pokeContent

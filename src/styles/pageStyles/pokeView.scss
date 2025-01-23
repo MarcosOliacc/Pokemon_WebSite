@@ -31,6 +31,7 @@
     height: 80%;
     img {
         width: 50%;
+        max-height: 340px;
     }
     h1 {
         font-size: 4rem;
@@ -110,7 +111,7 @@
 .statiSect {
     display: flex;
     flex-direction: column;
-    .pstat{margin-top: 30px;}
+    .pstat{margin-top: 30px; text-align: center;}
 }
 .staticTitle {
     font-size: 1.5rem;
@@ -137,7 +138,7 @@
     align-items: start;
     gap: 10px;
 
-    .skill {
+    .skill{
         font-weight: 700;
         transition: 0.3s ease-in-out;
         cursor: pointer;
@@ -148,6 +149,30 @@
     }
 }
 .skillInfo {
+    border-radius: 5px;
+    width: 300px;
+    padding: 10px;
+    cursor:pointer;
+    
+}
+.itemContent {
+    margin: 10px 0px 0px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+
+    .item {
+        font-weight: 700;
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+    }
+    .itemText {
+        font-weight: 400;
+        font-size: .9rem;
+    }
+}
+.itemInfo {
     border-radius: 5px;
     width: 300px;
     padding: 10px;
@@ -172,8 +197,9 @@
     display: flex;
     align-items:center;
     gap: 20px;
+    margin-top: 10px;
     img {
-        width: 80px;
+        width: 20%;
         cursor: pointer;
     }
 }
@@ -187,3 +213,114 @@
     -webkit-user-drag: none;
     -webkit-touch-callout: none;
 }
+
+@media (max-width:1200px) {
+    .topBlock {
+        flex-direction: column;
+    }
+    .figurePokeSect {
+        width: 100%;
+        h1 {
+            top: 0%;
+            left: 50%;
+            transform: translate(-50%, 0%);
+        }
+    }
+
+    .infosPokeSect {
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+    }
+    .infosHeader {
+        align-items: center;
+        width: 100%;
+        p {
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -30%);
+        }
+        
+        .pokeId {
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+    .seconInfos {
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+    }
+        .typesConteiner {
+            flex-direction: column;
+            align-items: center;
+        }
+
+    .statiSect {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .bottomBlock {
+        margin-top: 30px;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+    .seconContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        height: 200px;
+        width: fit-content;
+    }
+    .skillsContent {
+        align-items: center;
+        gap: 10px;
+    
+    }
+    .skillInfo {
+        left: 50%;
+        transform: translate(-50%);
+    }
+
+    .itemContent {
+        margin: 10px 0px 0px 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    
+        .item {
+            font-weight: 700;
+            transition: 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .itemText {
+            font-weight: 400;
+            font-size: .9rem;
+        }
+    }
+    .itemInfo {
+        border-radius: 5px;
+        width: 300px;
+        padding: 10px;
+        cursor:pointer;
+        
+    }
+    
+    .familyContent {
+        width: 50%;
+        display: flex;
+        align-items:center;
+        gap: 20px;
+        margin-top: 10px;
+        img {
+            width: 33%;
+            cursor: pointer;
+        }
+    }
+}
+

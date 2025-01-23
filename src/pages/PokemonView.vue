@@ -22,6 +22,8 @@ const pokeText = ref('')
 const pokeSkills = ref([])
 const actSkillSect = ref(null)
 const pokeFamily = ref({})
+const pokeItems = ref([])
+const actItemSect = ref(null)
 function rgb(r,g,b) {
     return `rgb(${r}, ${g}, ${b})`
 }
@@ -38,6 +40,7 @@ const loadImageAndColor = async ()=> {
             japName.value = res.infos.japName
             pokeFamily.value = res.family
             pokeSkills.value = res.skills
+            pokeItems.value = res.items
         })
         img.value = pokeContent.value.pokemon.sprites.other['dream_world'].front_default ? //----
         pokeContent.value.pokemon.sprites.other['dream_world'].front_default : //----
@@ -166,7 +169,7 @@ watch(() => route.params.value, async (novo, antigo) => {
                     </div>
                     <div class="statiSect">
                         <div class="statcContent" v-for="stat of pokeContent.pokemon.stats" :key="stat.name">
-                            <p class="staticTitle"><span class="thirdyColor">{{String(stat.stat.name).charAt(0).toUpperCase() + String(stat.stat.name).slice(1)}}</span><span class="secondaryColor"> - {{stat['base_stat']}}</span></p>
+                            <p class="staticTitle"><span class="thirdyColor">{{String(stat.stat.name).charAt(0).toUpperCase() + String(stat.stat.name).slice(1)}} - </span><span class="secondaryColor">{{stat['base_stat']}}</span></p>
                         </div>
                         <p class="pstat primaryColor">{{ pokeText}}</p>
                     </div>
@@ -180,10 +183,12 @@ watch(() => route.params.value, async (novo, antigo) => {
                     </h3>
                     <div class="skillsContent">
                         <div 
+                        
                             class="skillPok" 
                             v-for="skill of pokeSkills" 
                             :key="skill.name" 
                             style="position: relative;"
+                            
                         >
                             <!-- Nome da Habilidade -->
                             <p
@@ -227,11 +232,49 @@ watch(() => route.params.value, async (novo, antigo) => {
                     <h3 class="secondaryColor secunTitle">
                         fraqueza 
                     </h3>
+                    ""fazer a requisição dos multiplicadores e criar uma sessão separada""
                 </div>
                 <div class="seconContent">
                     <h3 class="secondaryColor secunTitle">
                         item
                     </h3>
+                    <div class="itemContent" v-if="pokeItems.length > 0" >
+                        <div 
+                            
+                                class="itempoke" 
+                                v-for="item of pokeItems" 
+                                :key="item.name" 
+                                style="position: relative;"
+                            >
+                                <p
+                                class="thirdyColor item"
+                                @mouseenter="actItemSect = item.name"
+                                @mouseleave="actItemSect = null"
+                                :style="{ zIndex: actItemSect === item.name ? 3 : 1,
+                                position: 'relative',
+                                marginLeft: actItemSect === item.name ? '30px' : '0px',
+    
+                                 }"
+                                >
+                                {{ item.name}}
+                                </p>
+    
+                                <!-- Texto da Habilidade -->
+                                <transition name="fade">
+                                    <div
+                                    @mouseenter="actItemSect = item.name"
+                                    @mouseleave="actItemSect = null"
+                                    v-show="actItemSect === item.name"
+                                    class="itemInfo tooltipColor"
+                                    :style="{ zIndex: 2, position: 'absolute', bottom: '-10%' }"
+                                    >
+                                    <p class="primaryColor itemTxt">{{ item.text }}</p>
+                                    </div>
+    
+                                </transition>
+                            </div>
+
+                    </div>
                 </div>
             </div>
         </div>
