@@ -5,6 +5,7 @@ import { useRoute, useRouter } from 'vue-router';
 import ColorThief from 'colorthief';
 import LoadingSect from '@/components/common/loading/LoadingSect.vue';
 import NoOne from '@/components/common/noOne/NoOne.vue';
+import MultplierSect from '@/components/common/multiplier/MultplierSect.vue';
 
 const route = useRoute();
 const router = useRouter()
@@ -232,7 +233,7 @@ watch(() => route.params.value, async (novo, antigo) => {
                     <h3 class="secondaryColor secunTitle">
                         fraqueza 
                     </h3>
-                    ""fazer a requisição dos multiplicadores e criar uma sessão separada""
+                    <MultplierSect :poke-type="pokeContent.pokemon.types"/>
                 </div>
                 <div class="seconContent">
                     <h3 class="secondaryColor secunTitle">
