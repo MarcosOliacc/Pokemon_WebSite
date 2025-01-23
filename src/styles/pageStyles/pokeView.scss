@@ -254,6 +254,10 @@
         .typesConteiner {
             flex-direction: column;
             align-items: center;
+            p {
+                text-align: center;
+            }
+            
         }
 
     .statiSect {
@@ -312,7 +316,7 @@
     }
     
     .familyContent {
-        width: 50%;
+        width: 60%;
         display: flex;
         align-items:center;
         gap: 20px;
@@ -320,6 +324,14 @@
         img {
             width: 33%;
             cursor: pointer;
+        }
+    }
+}
+@media (max-width:780px) {
+    .figurePokeSect {
+        h1 {
+            font-size: 3rem;
+            margin-top: -20px;
         }
     }
 }
