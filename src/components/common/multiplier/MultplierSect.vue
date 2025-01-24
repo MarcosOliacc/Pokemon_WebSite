@@ -9,13 +9,19 @@ import { onMounted, ref, watch } from 'vue';
     })
     let types = []
     const multipliers = ref({})
+    const defMultipliers = ref({})
+    const ataMultipliers = ref({})
+    const actvMultipler = ref('ataque')
 
     onMounted(()=>{
         props.pokeType.forEach((item)=> {
             types.push(item.type.name)
         })
         multipliers.value = getMultipliers(types)
-        console.log(multipliers.value)
+        defMultipliers.value = multipliers.value.defense
+        ataMultipliers.value = multipliers.value.attack
+        console.log(ataMultipliers.value)
+        console.log(defMultipliers.value)
     }) 
     watch(props.pokeType, (newProps)=> {
         types = []
@@ -23,7 +29,10 @@ import { onMounted, ref, watch } from 'vue';
             types.push(item.type.name)
         })
         multipliers.value = getMultipliers(types)
-        console.log(multipliers.value)
+        defMultipliers.value = multipliers.value.defense
+        ataMultipliers.value = multipliers.value.attack
+        console.log(ataMultipliers.value)
+        console.log(defMultipliers.value)
     })
 
 
@@ -32,9 +41,45 @@ import { onMounted, ref, watch } from 'vue';
 
 <template>
     <section class="cantet">
-        <div class="multConteiner">
+        <h3 class="secondaryColor">Multiplicadores</h3>
+        <div class="controlContent">
+            <div
+            @click="()=> {actvMultipler = actvMultipler == 'defesa'? 'ataque': 'defesa'}"
+            class="btnContent borderA" :style="{
+            }">
+                <p :style="{marginLeft: actvMultipler == 'defesa'? '-110px' : '0px'}"
+                class="invertSwit secondaryColor">Ataque</p>
+                <div :style="{
+                    left: actvMultipler == 'ataque'?'78px': '-2px' 
+                }" class="circleBtn borderA bgABC "></div>
 
-            <p v-for="(value, key) of multipliers" :key="key" >{{ value }}: {{ key }}</p>
+                <p class="secondaryColor bgABC">Defesa</p>
+            </div>
+        </div>
+        <div class="multConteiner">
+            <div
+            v-if="actvMultipler == 'ataque'"
+            class="multContent">
+                <div class="attackMult" v-for="(value, key) of ataMultipliers" :key="key">
+                    <div v-show="value != 1" class="mult">
+                        <img class="multImg" :src="key == 'fairy'? `/src/assets/images/icons/${key}.svg`:`/src/assets/images/icons/${key}.png`" alt="">
+                        <p>x{{value}}</p>
+                    </div>
+                </div>
+
+            </div>
+            <div
+            v-else
+            class="multContent">
+            <div class="attackMult" v-for="(value, key) of defMultipliers" :key="key">
+
+                <div v-show="value != 1" class="mult">
+                    <img class="multImg" :src="key == 'fairy'? `/src/assets/images/icons/${key}.svg`:`/src/assets/images/icons/${key}.png`" alt="">
+                    <p>x{{value}}</p>
+                </div>
+            </div>
+
+            </div>
         </div>
     </section>
 </template>

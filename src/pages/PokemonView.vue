@@ -79,10 +79,20 @@ const loadImageAndColor = async ()=> {
                             .borderColor { 
                                 text-shadow: -1px 0 ${bgColor}, 0 1px ${bgColor}, 1px 0 ${bgColor}, 0 -1px ${bgColor};
                             }
+                            .bgABC {
+                                background: ${bgColor};
+                            }
+                            .borderA {
+                                border: 2px solid ${secondaryColor};
+                            }
                             .tooltipColor {
                                 background: ${bgColor};
                                 border-bottom: 30px solid ${secondaryColor};
                             }
+                                .invertSwit {
+                                background: ${secondaryColor};
+                                color: ${bgColor};
+                                }
                             .invertedColor {
                                 background: ${invertedColor}
                             }
@@ -230,9 +240,6 @@ watch(() => route.params.value, async (novo, antigo) => {
                     </div>
                 </div>
                 <div class="seconContent">
-                    <h3 class="secondaryColor secunTitle">
-                        fraqueza 
-                    </h3>
                     <MultplierSect :poke-type="pokeContent.pokemon.types"/>
                 </div>
                 <div class="seconContent">
