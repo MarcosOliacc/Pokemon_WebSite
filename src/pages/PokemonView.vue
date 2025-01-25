@@ -47,7 +47,6 @@ const loadImageAndColor = async ()=> {
         pokeContent.value.pokemon.sprites.other['dream_world'].front_default : //----
         pokeContent.value.pokemon.sprites.other['official-artwork'].front_default
 
-    
         const image = new Image()
         image.crossOrigin = 'Anonymous'
         image.src = img.value 
@@ -244,37 +243,50 @@ watch(() => route.params.value, async (novo, antigo) => {
                 </div>
                 <div class="seconContent">
                     <h3 class="secondaryColor secunTitle">
-                        item
+                        Held Items
                     </h3>
-                    <div class="itemContent" v-if="pokeItems.length > 0" >
+                    <div class="itemContent" v-if="pokeItems.length > 0">
                         <div 
                             
-                                class="itempoke" 
+                                class="itemPoke" 
                                 v-for="item of pokeItems" 
-                                :key="item.name" 
+                                :key="item.itemName" 
                                 style="position: relative;"
-                            >
-                                <p
-                                class="thirdyColor item"
-                                @mouseenter="actItemSect = item.name"
+                                @mouseenter="actItemSect = item.itemName"
                                 @mouseleave="actItemSect = null"
-                                :style="{ zIndex: actItemSect === item.name ? 3 : 1,
+                            >
+
+                                <img class="pokeItemImg" :src="item.img" alt="pokeItem"
+                                :style="{ zIndex: actItemSect === item.itemName ? 3 : 1,
                                 position: 'relative',
-                                marginLeft: actItemSect === item.name ? '30px' : '0px',
+                                marginLeft: actItemSect === item.itemName ? '10px' : '0px',
+    
+                                 }"
+
+                                @mouseenter="actItemSect = item.itemName"
+                                @mouseleave="actItemSect = null"
+                                >
+                                <p
+                                class="thirdyColor itemName"
+                                @mouseenter="actItemSect = item.itemName"
+                                @mouseleave="actItemSect = null"
+                                :style="{ zIndex: actItemSect === item.itemName ? 3 : 1,
+                                position: 'relative',
+                                marginLeft: actItemSect === item.itemName ? '10px' : '0px',
     
                                  }"
                                 >
-                                {{ item.name}}
+                                {{ item.rarity }}% de ter {{ item.itemName}}
                                 </p>
     
                                 <!-- Texto da Habilidade -->
                                 <transition name="fade">
                                     <div
-                                    @mouseenter="actItemSect = item.name"
+                                    @mouseenter="actItemSect = item.itemName"
                                     @mouseleave="actItemSect = null"
-                                    v-show="actItemSect === item.name"
+                                    v-show="actItemSect === item.itemName"
                                     class="itemInfo tooltipColor"
-                                    :style="{ zIndex: 2, position: 'absolute', bottom: '-10%' }"
+                                    :style="{ zIndex: 2, position: 'absolute', bottom: '10%' }"
                                     >
                                     <p class="primaryColor itemTxt">{{ item.text }}</p>
                                     </div>

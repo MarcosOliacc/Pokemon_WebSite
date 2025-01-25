@@ -172,13 +172,16 @@ export const usePokeStore = defineStore('poke-store', () => {
           return {
             itemName: res.name,
             text: res['effect_entries'][0]['short_effect'],
-            img: res.sprites.default
+            img: res.sprites.default,
+            rarity: item['version_details'][0].rarity
             // reparar essa parte que esta dando erro, fazer testes
           }
         })
         
       ) 
+      
       pokeContent.items = heldItems
+      console.log(pokeContent)
     } catch (error) {
       console.error('Erro ao buscar pokémons:', error);
     }

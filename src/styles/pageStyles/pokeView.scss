@@ -121,11 +121,12 @@
 
 .bottomBlock {
     width: 100%;
+    margin-top: 30px;
     display: flex;
     justify-content: space-between;
 }
 .seconContent {
-    height: 200px;
+    min-height: 200px;
     width: 25%;
 }
 .skillsContent {
@@ -152,6 +153,16 @@
     cursor:pointer;
     
 }
+.itemPoke {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        img {
+            transition: 0.3s ease-in-out;
+            width: 40px;
+        }
+}
 .itemContent {
     margin: 10px 0px 0px 15px;
     display: flex;
@@ -159,10 +170,10 @@
     align-items: start;
     gap: 10px;
 
-    .item {
+    .itemName {
         font-weight: 700;
         transition: 0.3s ease-in-out;
-        cursor: pointer;
+        white-space: nowrap;
     }
     .itemText {
         font-weight: 400;
@@ -274,7 +285,7 @@
         flex-direction: column;
         align-items: center;
 
-        height: 200px;
+        min-height: 200px;
         width: fit-content;
     }
     .skillsContent {
@@ -286,7 +297,7 @@
         left: 50%;
         transform: translate(-50%);
     }
-
+    
     .itemContent {
         margin: 10px 0px 0px 15px;
         display: flex;

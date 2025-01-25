@@ -51,3 +51,21 @@
 .multImg {
     width: 40px;
 }
+
+@media (max-width: 1200px) {
+    .cantet {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+    .controlContent {
+        display: flex;
+        justify-content: center;
+    }
+    .multContent {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
