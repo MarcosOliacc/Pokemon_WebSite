@@ -60,7 +60,7 @@ import { onMounted, ref, watch } from 'vue';
             class="multContent">
                 <div class="attackMult" v-for="(value, key) of ataMultipliers" :key="key">
                     <div v-show="value != 1" class="mult">
-                        <img class="multImg" :src="key == 'fairy'? `/src/assets/images/icons/${key}.svg`:`/src/assets/images/icons/${key}.png`" alt="">
+                        <img class="multImg" :src="key == 'fairy'? `/types/${key}.svg`:`/types/${key}.png`" alt="">
                         <p>x{{value}}</p>
                     </div>
                 </div>
@@ -72,7 +72,7 @@ import { onMounted, ref, watch } from 'vue';
             <div class="attackMult" v-for="(value, key) of defMultipliers" :key="key">
 
                 <div v-show="value != 1" class="mult">
-                    <img class="multImg" :src="key == 'fairy'? `/src/assets/images/icons/${key}.svg`:`/src/assets/images/icons/${key}.png`" alt="">
+                    <img class="multImg" :src="key == 'fairy'? `/types/${key}.svg`:`/types/${key}.png`" alt="">
                     <p>x{{value}}</p>
                 </div>
             </div>

@@ -179,7 +179,7 @@ watch(() => route.params.value, async (novo, antigo) => {
                                     </div>
                                 </div>
                                 <p class="primaryColor">
-                                    Blooms when it is absorbing solar energy.
+                                    I'm still looking for this information..
                                 </p>
                             </div>
                             <div class="dimensConteiner">
