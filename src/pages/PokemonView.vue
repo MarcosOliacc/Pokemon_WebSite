@@ -1,6 +1,6 @@
 <script setup>
 import { usePokeStore } from '@/stores/pokemons';
-import { onBeforeMount, ref, watch } from 'vue';
+import { onBeforeMount, onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import ColorThief from 'colorthief';
 import LoadingSect from '@/components/common/loading/LoadingSect.vue';
@@ -13,6 +13,7 @@ const pokeStore = usePokeStore();
 const routeValue = ref('')
 const loading = ref(false)
 const pokeError = ref(false)
+const body = ref(null)
 
 const img = ref('')
 const pokeContent = ref({});
@@ -131,6 +132,11 @@ onBeforeMount(async () => {
     console.error("Erro no carregamento:", err);
   }
 });
+onMounted(()=> {
+    if (body.value) {
+    body.value.scrollIntoView({ behavior: 'smooth' });
+  }
+})
 
 watch(() => route.params.value, async (novo, antigo) => {
   if (novo !== antigo) {
@@ -145,7 +151,7 @@ watch(() => route.params.value, async (novo, antigo) => {
 </script>
 
 <template>
-    <section class="conteiner">
+    <section class="conteiner" ref="body">
         <NoOne v-if="!routeValue"/>
         <LoadingSect v-if="loading"/>
         <div v-if="!loading" class="pokeConteiner bgColor">
