@@ -100,7 +100,7 @@ function pokeballMove(posit) {
                         Sobre
                     </RouterLink>
                     <a @mouseover="()=>{pokeballMove('325px')}" class="linksLi" 
-                    href="https://github.com/MarcosOliacc/vuejs/tree/main/03-treinandoConteudos/02-pokemons" 
+                    href="https://github.com/MarcosOliacc/Pokemon_WebSite" 
                     target="_blank">
                         Repositório
                     </a>
