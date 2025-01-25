@@ -306,6 +306,7 @@ watch(filterContent, ()=>{
         </div>
         <PokeGrid id="42323" v-if="resFilts" :pokemons="pokeStore.filteredPokes"/>
         <PokeGrid v-else-if="pokeStore.pokemonsPerPage.length > 1" :origin="'homePage'" :pokemons="pokeStore.pokemonsPerPage"/>
+
     </div>
 </template>
 <style scoped>

@@ -13,7 +13,6 @@ const pokeStore = usePokeStore();
 const routeValue = ref('')
 const loading = ref(false)
 const pokeError = ref(false)
-const body = ref(null)
 
 const img = ref('')
 const pokeContent = ref({});
@@ -133,9 +132,7 @@ onBeforeMount(async () => {
   }
 });
 onMounted(()=> {
-    if (body.value) {
-    body.value.scrollIntoView({ behavior: 'smooth' });
-  }
+
 })
 
 watch(() => route.params.value, async (novo, antigo) => {
@@ -151,7 +148,7 @@ watch(() => route.params.value, async (novo, antigo) => {
 </script>
 
 <template>
-    <section class="conteiner" ref="body">
+    <section class="conteiner">
         <NoOne v-if="!routeValue"/>
         <LoadingSect v-if="loading"/>
         <div v-if="!loading" class="pokeConteiner bgColor">
@@ -170,7 +167,7 @@ watch(() => route.params.value, async (novo, antigo) => {
                     contenteditable="false">
                         <div class="infosHeader" >
                             <p class="secondaryColor leftBit">{{pokeGenera.genus}}</p>
-                            <h2 class="borderColor primaryColor">{{String(pokeContent.pokemon.name).charAt(0).toUpperCase() + String(pokeContent.pokemon.name).slice(1)}}</h2>
+                            <h2 class=" borderColor primaryColor">{{String(pokeContent.pokemon.name).charAt(0).toUpperCase() + String(pokeContent.pokemon.name).slice(1)}}</h2>
                             <h1 class="pokeId secondaryColor">{{ pokeContent.pokemon.id }}</h1>
                         </div>
                         <div class="seconInfos">
@@ -184,14 +181,12 @@ watch(() => route.params.value, async (novo, antigo) => {
                                         <p>{{types.type.name}}</p>
                                     </div>
                                 </div>
-                                <p class="primaryColor">
-                                    I'm still looking for this information..
-                                </p>
+                                <div class="dimensConteiner">
+                                    <p class="primaryColor">Altura: {{pokeHeight}} m</p>
+                                    <p class="primaryColor">Peso: {{ pokeweight }} kg</p>
+                                </div>  
+
                             </div>
-                            <div class="dimensConteiner">
-                                <p class="primaryColor">Altura: {{pokeHeight}} m</p>
-                                <p class="primaryColor">Peso: {{ pokeweight }} kg</p>
-                            </div>  
                         
                         </div>
                         <div class="statiSect">
@@ -264,7 +259,7 @@ watch(() => route.params.value, async (novo, antigo) => {
                         </h3>
                         <div class="itemContent " v-if="pokeItems.length > 0" >
                             <div 
-                                
+                                    
                                     class="itemPoke" 
                                     v-for="item of pokeItems" 
                                     :key="item.itemName" 
@@ -311,6 +306,9 @@ watch(() => route.params.value, async (novo, antigo) => {
                                     </transition>
                                 </div>
     
+                        </div>
+                        <div v-else>
+                            <p class="secondaryColor">Nenhum item disponivel</p>
                         </div>
                     </div>
                 </div>
