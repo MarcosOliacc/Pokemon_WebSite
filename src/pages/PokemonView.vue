@@ -12,6 +12,7 @@ const router = useRouter()
 const pokeStore = usePokeStore();
 const routeValue = ref('')
 const loading = ref(false)
+const pokeError = ref(false)
 
 const img = ref('')
 const pokeContent = ref({});
@@ -42,6 +43,10 @@ const loadImageAndColor = async ()=> {
             pokeFamily.value = res.family
             pokeSkills.value = res.skills
             pokeItems.value = res.items
+        }).catch(()=>{
+            
+            pokeError.value = true
+            loading.value = false
         })
         img.value = pokeContent.value.pokemon.sprites.other['dream_world'].front_default ? //----
         pokeContent.value.pokemon.sprites.other['dream_world'].front_default : //----
@@ -144,158 +149,166 @@ watch(() => route.params.value, async (novo, antigo) => {
         <NoOne v-if="!routeValue"/>
         <LoadingSect v-if="loading"/>
         <div v-if="!loading" class="pokeConteiner bgColor">
-            <div class="topBlock">
-                <div class="figurePokeSect">
-                    <img :src="img" :alt="`${pokeContent.pokemon.name} imagem`">
-                    <h1 class="secondaryColor no-interaction" contenteditable="false">{{ japName }}</h1>
-                </div>
-                <div class="infosPokeSect no-interaction"
-                contenteditable="false">
-                    <div class="infosHeader" >
-                        <p class="secondaryColor leftBit">{{pokeGenera.genus}}</p>
-                        <h2 class="borderColor primaryColor">{{String(pokeContent.pokemon.name).charAt(0).toUpperCase() + String(pokeContent.pokemon.name).slice(1)}}</h2>
-                        <h1 class="pokeId secondaryColor">{{ pokeContent.pokemon.id }}</h1>
-                    </div>
-                    <div class="seconInfos">
-                        <div class="typesConteiner">
-                            <div class="typeHapp">
-                                <div
-                                v-for="types of pokeContent.pokemon.types"
-                                :key="types.type.name"
-                                :class="`type ${types.type.name}`"
-                                >
-                                    <p>{{types.type.name}}</p>
-                                </div>
-                            </div>
-                            <p class="primaryColor">
-                                Blooms when it is absorbing solar energy.
-                            </p>
-                        </div>
-                        <div class="dimensConteiner">
-                            <p class="primaryColor">Altura: {{pokeHeight}} m</p>
-                            <p class="primaryColor">Peso: {{ pokeweight }} kg</p>
-                        </div>  
-                    
-                    </div>
-                    <div class="statiSect">
-                        <div class="statcContent" v-for="stat of pokeContent.pokemon.stats" :key="stat.name">
-                            <p class="staticTitle"><span class="thirdyColor">{{String(stat.stat.name).charAt(0).toUpperCase() + String(stat.stat.name).slice(1)}} - </span><span class="secondaryColor">{{stat['base_stat']}}</span></p>
-                        </div>
-                        <p class="pstat primaryColor">{{ pokeText}}</p>
-                    </div>
-
-                </div>
+            <div v-if="pokeError == true" class="errorPoke">
+                <h1>Ops, o tadinho esta com defeito &#128557; </h1>
+                <p>Infelizmente alguns pokemons não estão completos na api oficial, então ficarão trancados por enquanto :(</p>
+                <img src="/src/assets/images/pikachu-triste.jpeg" alt="">
             </div>
-            <div class="bottomBlock">
-                <div class="seconContent">
-                    <h3 class="secondaryColor secunTitle">
-                        habilidades 
-                    </h3>
-                    <div class="skillsContent">
-                        <div 
+            <div v-else>
+                <div class="topBlock">
+                    <div class="figurePokeSect">
+                        <img :src="img" :alt="`${pokeContent.pokemon.name} imagem`">
+                        <h1 class="secondaryColor no-interaction" contenteditable="false">{{ japName }}</h1>
+                    </div>
+                    <div class="infosPokeSect no-interaction"
+                    contenteditable="false">
+                        <div class="infosHeader" >
+                            <p class="secondaryColor leftBit">{{pokeGenera.genus}}</p>
+                            <h2 class="borderColor primaryColor">{{String(pokeContent.pokemon.name).charAt(0).toUpperCase() + String(pokeContent.pokemon.name).slice(1)}}</h2>
+                            <h1 class="pokeId secondaryColor">{{ pokeContent.pokemon.id }}</h1>
+                        </div>
+                        <div class="seconInfos">
+                            <div class="typesConteiner">
+                                <div class="typeHapp">
+                                    <div
+                                    v-for="types of pokeContent.pokemon.types"
+                                    :key="types.type.name"
+                                    :class="`type ${types.type.name}`"
+                                    >
+                                        <p>{{types.type.name}}</p>
+                                    </div>
+                                </div>
+                                <p class="primaryColor">
+                                    Blooms when it is absorbing solar energy.
+                                </p>
+                            </div>
+                            <div class="dimensConteiner">
+                                <p class="primaryColor">Altura: {{pokeHeight}} m</p>
+                                <p class="primaryColor">Peso: {{ pokeweight }} kg</p>
+                            </div>  
                         
-                            class="skillPok" 
-                            v-for="skill of pokeSkills" 
-                            :key="skill.name" 
-                            style="position: relative;"
+                        </div>
+                        <div class="statiSect">
+                            <div class="statcContent" v-for="stat of pokeContent.pokemon.stats" :key="stat.name">
+                                <p class="staticTitle"><span class="thirdyColor">{{String(stat.stat.name).charAt(0).toUpperCase() + String(stat.stat.name).slice(1)}} - </span><span class="secondaryColor">{{stat['base_stat']}}</span></p>
+                            </div>
+                            <p class="pstat primaryColor">{{ pokeText}}</p>
+                        </div>
+    
+                    </div>
+                </div>
+                <div class="bottomBlock">
+                    <div class="seconContent">
+                        <h3 class="secondaryColor secunTitle">
+                            habilidades 
+                        </h3>
+                        <div class="skillsContent">
+                            <div 
                             
-                        >
-                            <!-- Nome da Habilidade -->
-                            <p
-                            class="thirdyColor skill"
-                            @mouseenter="actSkillSect = skill.name"
-                            @mouseleave="actSkillSect = null"
-                            :style="{ zIndex: actSkillSect === skill.name ? 3 : 1,
-                            position: 'relative',
-                            marginLeft: actSkillSect === skill.name ? '30px' : '0px',
-
-                             }"
+                                class="skillPok" 
+                                v-for="skill of pokeSkills" 
+                                :key="skill.name" 
+                                style="position: relative;"
+                                
                             >
-                            {{ skill.name.replaceAll('-', ' ') }}
-                            </p>
-
-                            <!-- Texto da Habilidade -->
-                            <transition name="fade">
-                                <div
+                                <!-- Nome da Habilidade -->
+                                <p
+                                class="thirdyColor skill"
                                 @mouseenter="actSkillSect = skill.name"
                                 @mouseleave="actSkillSect = null"
-                                v-show="actSkillSect === skill.name"
-                                class="skillInfo tooltipColor"
-                                :style="{ zIndex: 2, position: 'absolute', bottom: '-10%' }"
-                                >
-                                <p class="primaryColor skillTxt">{{ skill.text }}</p>
-                                </div>
-
-                            </transition>
-                        </div>
-                    </div>
-                </div>
-                <div class="seconContent">
-                    <h3 class="secondaryColor secunTitle">
-                        familia 
-                    </h3>
-                    <div class="familyContent">
-                        <img @click="()=>router.push(`/pokemon/${member}`) " v-for="member of pokeFamily" :key="member" :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${member}.svg`" alt="">
-                    </div>
-                </div>
-                <div class="seconContent">
-                    <MultplierSect :poke-type="pokeContent.pokemon.types"/>
-                </div>
-                <div class="seconContent">
-                    <h3 class="secondaryColor secunTitle">
-                        Held Items
-                    </h3>
-                    <div class="itemContent " v-if="pokeItems.length > 0" >
-                        <div 
-                            
-                                class="itemPoke" 
-                                v-for="item of pokeItems" 
-                                :key="item.itemName" 
-                                style="position: relative;"
-                                @mouseenter="actItemSect = item.itemName"
-                                @mouseleave="actItemSect = null"
-                            >
-
-                                <img class="pokeItemImg" :src="item.img" alt="pokeItem"
-                                :style="{ zIndex: actItemSect === item.itemName ? 3 : 1,
+                                :style="{ zIndex: actSkillSect === skill.name ? 3 : 1,
                                 position: 'relative',
-                                marginLeft: actItemSect === item.itemName ? '10px' : '0px',
-    
-                                 }"
-
-                                @mouseenter="actItemSect = item.itemName"
-                                @mouseleave="actItemSect = null"
-                                >
-                                <p
-                                class="thirdyColor itemName"
-                                @mouseenter="actItemSect = item.itemName"
-                                @mouseleave="actItemSect = null"
-                                :style="{ zIndex: actItemSect === item.itemName ? 3 : 1,
-                                position: 'relative',
-                                marginLeft: actItemSect === item.itemName ? '10px' : '0px',
+                                marginLeft: actSkillSect === skill.name ? '30px' : '0px',
     
                                  }"
                                 >
-                                {{ item.rarity }}% de ter {{ item.itemName}}
+                                {{ skill.name.replaceAll('-', ' ') }}
                                 </p>
     
                                 <!-- Texto da Habilidade -->
                                 <transition name="fade">
                                     <div
-                                    @mouseenter="actItemSect = item.itemName"
-                                    @mouseleave="actItemSect = null"
-                                    v-show="actItemSect === item.itemName"
-                                    class="itemInfo tooltipColor"
-                                    :style="{ zIndex: 2, position: 'absolute', bottom: '10%' }"
+                                    @mouseenter="actSkillSect = skill.name"
+                                    @mouseleave="actSkillSect = null"
+                                    v-show="actSkillSect === skill.name"
+                                    class="skillInfo tooltipColor"
+                                    :style="{ zIndex: 2, position: 'absolute', bottom: '-10%' }"
                                     >
-                                    <p class="primaryColor itemTxt">{{ item.text }}</p>
+                                    <p class="primaryColor skillTxt">{{ skill.text }}</p>
                                     </div>
     
                                 </transition>
                             </div>
-
+                        </div>
+                    </div>
+                    <div class="seconContent">
+                        <h3 class="secondaryColor secunTitle">
+                            familia 
+                        </h3>
+                        <div class="familyContent">
+                            <img @click="()=>router.push(`/pokemon/${member}`) " v-for="member of pokeFamily" :key="member" :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${member}.svg`" alt="">
+                        </div>
+                    </div>
+                    <div class="seconContent">
+                        <MultplierSect :poke-type="pokeContent.pokemon.types"/>
+                    </div>
+                    <div class="seconContent">
+                        <h3 class="secondaryColor secunTitle">
+                            Held Items
+                        </h3>
+                        <div class="itemContent " v-if="pokeItems.length > 0" >
+                            <div 
+                                
+                                    class="itemPoke" 
+                                    v-for="item of pokeItems" 
+                                    :key="item.itemName" 
+                                    style="position: relative;"
+                                    @mouseenter="actItemSect = item.itemName"
+                                    @mouseleave="actItemSect = null"
+                                >
+    
+                                    <img class="pokeItemImg" :src="item.img" alt="pokeItem"
+                                    :style="{ zIndex: actItemSect === item.itemName ? 3 : 1,
+                                    position: 'relative',
+                                    marginLeft: actItemSect === item.itemName ? '10px' : '0px',
+        
+                                     }"
+    
+                                    @mouseenter="actItemSect = item.itemName"
+                                    @mouseleave="actItemSect = null"
+                                    >
+                                    <p
+                                    class="thirdyColor itemName"
+                                    @mouseenter="actItemSect = item.itemName"
+                                    @mouseleave="actItemSect = null"
+                                    :style="{ zIndex: actItemSect === item.itemName ? 3 : 1,
+                                    position: 'relative',
+                                    marginLeft: actItemSect === item.itemName ? '10px' : '0px',
+        
+                                     }"
+                                    >
+                                    {{ item.rarity }}% de ter {{ item.itemName}}
+                                    </p>
+        
+                                    <!-- Texto da Habilidade -->
+                                    <transition name="fade">
+                                        <div
+                                        @mouseenter="actItemSect = item.itemName"
+                                        @mouseleave="actItemSect = null"
+                                        v-show="actItemSect === item.itemName"
+                                        class="itemInfo tooltipColor"
+                                        :style="{ zIndex: 2, position: 'absolute', bottom: '10%' }"
+                                        >
+                                        <p class="primaryColor itemTxt">{{ item.text }}</p>
+                                        </div>
+        
+                                    </transition>
+                                </div>
+    
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>

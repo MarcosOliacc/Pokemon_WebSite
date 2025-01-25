@@ -110,16 +110,23 @@ export const usePokeStore = defineStore('poke-store', () => {
   async function getPoke(param) {
     const pokeContent = {}
     const lowerParam = String(param).toLowerCase()
-    const res = allPokemons.value.filter((poke)=> {
-      if(poke.name == lowerParam) {return poke}
-      else if (poke.id == lowerParam) {return poke}
-      else return false
-    })
-    pokeContent.pokemon = res[0]
-
-    const speciePokeUrl = pokeContent.pokemon.species.url 
-    const res2 = await fetch(speciePokeUrl).then(res=> res.json())
-    pokeContent.infos = {genera: res2.genera[7], japName: res2.names[0].name, text: res2['flavor_text_entries'][1]}
+    let res22 = {}
+    try {
+      const res = allPokemons.value.filter((poke)=> {
+        if(poke.name == lowerParam) {return poke}
+        else if (poke.id == lowerParam) {return poke}
+        else return false
+      })
+      pokeContent.pokemon = res[0]
+  
+      const speciePokeUrl = pokeContent.pokemon.species.url 
+      const res2 = await fetch(speciePokeUrl).then(res=> res.json())
+      pokeContent.infos = {genera: res2.genera[7], japName: res2.names[0].name, text: res2['flavor_text_entries'][1]}
+      res22 = res2
+    } catch (error) {
+      console.log(error)
+      return false
+    }
 
     let skills = []
 
@@ -137,10 +144,11 @@ export const usePokeStore = defineStore('poke-store', () => {
       pokeContent.skills = skills
     } catch (error) {
       console.error('Erro ao buscar pokémons:', error);
+      return false
     }
 
     try {
-      const famRes = await fetch(res2['evolution_chain'].url).then(res=> res.json())
+      const famRes = await fetch(res22['evolution_chain'].url).then(res=> res.json())
       
       // const famNames = [
       //   famRes.chain.species.name? famRes.chain.species.name: '', 
@@ -163,6 +171,7 @@ export const usePokeStore = defineStore('poke-store', () => {
       pokeContent.family = resIds
     } catch (error) {
       console.error('Erro ao buscar pokémons:', error);
+      return false
     }
     
     try { 
@@ -181,9 +190,9 @@ export const usePokeStore = defineStore('poke-store', () => {
       ) 
       
       pokeContent.items = heldItems
-      console.log(pokeContent)
     } catch (error) {
       console.error('Erro ao buscar pokémons:', error);
+      return false
     }
 
 

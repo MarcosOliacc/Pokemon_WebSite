@@ -20,8 +20,7 @@ import { onMounted, ref, watch } from 'vue';
         multipliers.value = getMultipliers(types)
         defMultipliers.value = multipliers.value.defense
         ataMultipliers.value = multipliers.value.attack
-        console.log(ataMultipliers.value)
-        console.log(defMultipliers.value)
+
     }) 
     watch(props.pokeType, (newProps)=> {
         types = []
@@ -31,8 +30,7 @@ import { onMounted, ref, watch } from 'vue';
         multipliers.value = getMultipliers(types)
         defMultipliers.value = multipliers.value.defense
         ataMultipliers.value = multipliers.value.attack
-        console.log(ataMultipliers.value)
-        console.log(defMultipliers.value)
+
     })
 
 
