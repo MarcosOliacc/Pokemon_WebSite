@@ -147,6 +147,7 @@ watch(() => route.params.value, async (novo, antigo) => {
     routeValue.value = novo;
     try {
       await loadImageAndColor();
+      scrollToComponent();
     } catch (err) {
       console.error("Erro no watch:", err);
     }
