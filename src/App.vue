@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import HeaderSect from './components/Header/HeaderSect.vue';
+import FooterSect from './components/footer/FooterSect.vue';
 import { usePokeStore } from './stores/pokemons';
 const pokeStore = usePokeStore()
 onMounted(async()=> {
@@ -25,7 +26,7 @@ const theme = ref('')
     <div id="conteiner">
       <HeaderSect @theme="newTheme"/>
       <RouterView/>
-
+      <FooterSect/>
     </div>
   </div>
 </template>

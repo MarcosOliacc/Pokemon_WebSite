@@ -1,0 +1,26 @@
+@import '/src/styles/variables.scss';
+
+.conteinerF {
+    padding: 30px;
+    width: 100%;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p {
+        text-align: center;
+    }
+    .footLinksContent {
+        margin-top: 20px;
+        display: flex;
+        gap: 20px;
+        img {
+            width: 40px;
+        }
+    }
+}
+@media (max-width: 780px) {
+    p {
+        font-size: .7rem;
+    }
+}
