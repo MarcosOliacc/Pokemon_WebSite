@@ -56,7 +56,7 @@ import { onMounted, ref, watch } from 'vue';
                 <p class="secondaryColor bgABC">Defesa</p>
             </div>
         </div>
-        <div class="multConteiner">
+        <div class="multConteiner no-interaction">
             <div
             v-if="actvMultipler == 'ataque'"
             class="multContent">

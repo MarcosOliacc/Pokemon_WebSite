@@ -35,6 +35,12 @@
 .multConteiner {
     margin-top: 20px;
 }
+.no-interaction {
+    user-select: none;
+    pointer-events: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+}
 .multContent {
     display: flex;
     flex-wrap: wrap;

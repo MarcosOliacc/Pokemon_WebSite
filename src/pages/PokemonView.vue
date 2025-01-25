@@ -245,7 +245,7 @@ watch(() => route.params.value, async (novo, antigo) => {
                     <h3 class="secondaryColor secunTitle">
                         Held Items
                     </h3>
-                    <div class="itemContent" v-if="pokeItems.length > 0">
+                    <div class="itemContent " v-if="pokeItems.length > 0" >
                         <div 
                             
                                 class="itemPoke" 
