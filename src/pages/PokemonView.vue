@@ -13,6 +13,7 @@ const pokeStore = usePokeStore();
 const routeValue = ref('')
 const loading = ref(false)
 const pokeError = ref(false)
+const compadre = ref(null)
 
 const img = ref('')
 const pokeContent = ref({});
@@ -131,8 +132,14 @@ onBeforeMount(async () => {
     console.error("Erro no carregamento:", err);
   }
 });
-onMounted(()=> {
+const scrollToComponent = () => {
+  if (compadre.value) {
+    compadre.value.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 
+onMounted(() => {
+  scrollToComponent();
 })
 
 watch(() => route.params.value, async (novo, antigo) => {
@@ -148,8 +155,8 @@ watch(() => route.params.value, async (novo, antigo) => {
 </script>
 
 <template>
-    <section class="conteiner">
-        <NoOne v-if="!routeValue"/>
+    <section class="conteiner" ref="compadre">
+        <NoOne v-if="!routeValue" />
         <LoadingSect v-if="loading"/>
         <div v-if="!loading" class="pokeConteiner bgColor">
             <div v-if="pokeError == true" class="errorPoke">
