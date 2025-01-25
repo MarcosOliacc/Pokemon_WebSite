@@ -6,13 +6,13 @@
         <p>PokePage inspirada no <a target="blank" href="https://naramsim.github.io/Colosseum/">naramsim/Colosseum/</a></p>
         <div class="footLinksContent">
             <a target='blank' href="https://www.linkedin.com/in/marcos-oliveira-733151291/">
-                <img src="/src/assets/images/icons/githubIcon.png" alt="">
+                <img src="/src/assets/images/icons/linkedinIcon.svg" alt="">
             </a>
             <a target='blank' href="https://www.instagram.com/vinixos1/">
                 <img src="/src/assets/images/icons/instagramIcon.svg" alt="">
             </a>
             <a target='blank' href="https://github.com/MarcosOliacc">
-                <img src="/src/assets/images/icons/linkedinIcon.svg" alt="">
+                <img src="/src/assets/images/icons/githubIcon.png" alt="">
             </a>
         </div>
     </section>
